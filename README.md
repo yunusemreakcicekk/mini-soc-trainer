@@ -6,6 +6,11 @@ It helps users practice detection, triage, and decision-making skills using real
 
 ---
 
+## 🌐 Live Demo
+
+🔗 https://mini-soc-trainer-1.onrender.com
+
+
 ## 🎯 Who Is This For?
 
 This project is suitable for:
