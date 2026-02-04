@@ -1,0 +1,1122 @@
+{
+    "SCN_001": {
+        "attack_type": {
+            "en": "SSH Brute Force",
+            "tr": "SSH Brute Force [TR]"
+        },
+        "summary": {
+            "en": "3 failed SSH login attempts from the same IP within 1 minute",
+            "tr": "1 dakika içinde aynı IP'den 3 başarısız SSH giriş denemesi"
+        },
+        "source_ip": "192.168.1.50",
+        "failed_attempts": 3,
+        "time_window": {
+            "en": "1 minute",
+            "tr": "1 dakika"
+        },
+        "severity": "LOW",
+        "baseline": {
+            "en": "Normal user activity",
+            "tr": "Normal kullanıcı aktivitesi"
+        },
+        "observed": {
+            "en": "3 failed attempts",
+            "tr": "3 başarısız deneme"
+        },
+        "deviation": "Low",
+        "confidence": 65,
+        "difficulty": "Easy"
+    },
+    "SCN_002": {
+        "attack_type": {
+            "en": "SSH Brute Force",
+            "tr": "SSH Brute Force [TR]"
+        },
+        "summary": {
+            "en": "7 failed SSH login attempts from the same IP within 30 seconds",
+            "tr": "30 saniye içinde aynı IP'den 7 başarısız SSH giriş denemesi"
+        },
+        "source_ip": "192.168.1.77",
+        "failed_attempts": 7,
+        "time_window": {
+            "en": "30 seconds",
+            "tr": "30 saniye"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "< 1 failure/hour",
+            "tr": "< 1 hata/saat"
+        },
+        "observed": {
+            "en": "7 failures/30s",
+            "tr": "7 hata/30sn"
+        },
+        "deviation": "High",
+        "confidence": 92,
+        "difficulty": "Easy"
+    },
+    "SCN_003": {
+        "attack_type": {
+            "en": "SSH Authentication Anomaly",
+            "tr": "SSH Kimlik Doğrulama Anormalliği"
+        },
+        "summary": {
+            "en": "10 failed SSH login attempts from the same IP over 12 minutes, targeting multiple users",
+            "tr": "12 dakika içinde aynı IP'den birden fazla kullanıcıyı hedef alan 10 başarısız SSH giriş denemesi"
+        },
+        "source_ip": "10.0.0.23",
+        "failed_attempts": 10,
+        "time_window": {
+            "en": "12 minutes",
+            "tr": "12 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Zero failures",
+            "tr": "Sıfır hata"
+        },
+        "observed": {
+            "en": "Distributed failures",
+            "tr": "Dağıtık hatalar"
+        },
+        "deviation": "Medium",
+        "confidence": 78,
+        "difficulty": "Medium"
+    },
+    "SCN_004": {
+        "attack_type": {
+            "en": "Password Spraying",
+            "tr": "Parola Püskürtme"
+        },
+        "summary": {
+            "en": "One failed SSH login attempt per user from the same IP, targeting 8 different users within 5 minutes",
+            "tr": "5 dakika içinde 8 farklı kullanıcıyı hedef alan, kullanıcı başına bir başarısız SSH giriş denemesi"
+        },
+        "source_ip": "185.199.110.45",
+        "failed_attempts": 8,
+        "time_window": {
+            "en": "5 minutes",
+            "tr": "5 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Unique user logins",
+            "tr": "Benzersiz kullanıcı girişleri"
+        },
+        "observed": {
+            "en": "Single IP -> Many Users",
+            "tr": "Tek IP -> Çok Kullanıcı"
+        },
+        "deviation": "High",
+        "confidence": 88,
+        "difficulty": "Medium"
+    },
+    "SCN_005": {
+        "attack_type": {
+            "en": "Network Reconnaissance",
+            "tr": "Ağ Keşfi"
+        },
+        "summary": {
+            "en": "The same external IP attempted connections to 120 different TCP ports on a single host within 90 seconds",
+            "tr": "Aynı harici IP, 90 saniye içinde tek bir ana bilgisayardaki 120 farklı TCP portuna bağlanmaya çalıştı"
+        },
+        "source_ip": "45.83.193.10",
+        "failed_attempts": 120,
+        "time_window": {
+            "en": "90 seconds",
+            "tr": "90 saniye"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Specific port access",
+            "tr": "Belirli port erişimi"
+        },
+        "observed": {
+            "en": "Widespread port scan",
+            "tr": "Geniş port taraması"
+        },
+        "deviation": "High",
+        "confidence": 95,
+        "difficulty": "Easy"
+    },
+    "SCN_006": {
+        "attack_type": {
+            "en": "Credential Compromise",
+            "tr": "Kimlik Bilgisi İhlali"
+        },
+        "summary": {
+            "en": "Multiple failed SSH login attempts followed by a successful login from the same IP within 2 minutes",
+            "tr": "2 dakika içinde aynı IP'den birden fazla başarısız SSH giriş denemesinin ardından başarılı bir giriş"
+        },
+        "source_ip": "103.21.58.44",
+        "failed_attempts": 12,
+        "time_window": {
+            "en": "2 minutes",
+            "tr": "2 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Successful first try",
+            "tr": "Başarılı ilk deneme"
+        },
+        "observed": {
+            "en": "Failures then Success",
+            "tr": "Hatalar sonra Başarı"
+        },
+        "deviation": "Critical",
+        "confidence": 98,
+        "difficulty": "Medium"
+    },
+    "SCN_007": {
+        "attack_type": {
+            "en": "DNS Tunneling",
+            "tr": "DNS Tünelleme"
+        },
+        "summary": {
+            "en": "A single host generated hundreds of DNS queries with long, random-looking subdomains to the same external domain over 15 minutes",
+            "tr": "Tek bir ana bilgisayar, 15 dakika içinde aynı harici etki alanına uzun, rastgele görünümlü alt etki alanlarıyla yüzlerce DNS sorgusu oluşturdu"
+        },
+        "source_ip": "192.168.10.25",
+        "failed_attempts": 350,
+        "time_window": {
+            "en": "15 minutes",
+            "tr": "15 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Standard DNS lookups",
+            "tr": "Standart DNS aramaları"
+        },
+        "observed": {
+            "en": "High entropy subdomains",
+            "tr": "Yüksek entropili alt alanlar"
+        },
+        "deviation": "High",
+        "confidence": 90,
+        "difficulty": "Hard"
+    },
+    "SCN_008": {
+        "attack_type": {
+            "en": "Command and Control Beaconing",
+            "tr": "Komuta ve Kontrol İşaretleşmesi"
+        },
+        "summary": {
+            "en": "An internal host made outbound HTTPS connections to the same external IP every 60 seconds for over 1 hour",
+            "tr": "Dahili bir ana bilgisayar, 1 saati aşkın bir süre boyunca her 60 saniyede bir aynı harici IP'ye giden HTTPS bağlantıları kurdu"
+        },
+        "source_ip": "192.168.20.44",
+        "failed_attempts": 60,
+        "time_window": {
+            "en": "60 minutes",
+            "tr": "60 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Random user browsing",
+            "tr": "Rastgele kullanıcı taraması"
+        },
+        "observed": {
+            "en": "Fixed interval connections",
+            "tr": "Sabit aralıklı bağlantılar"
+        },
+        "deviation": "High",
+        "confidence": 85,
+        "difficulty": "Medium"
+    },
+    "SCN_009": {
+        "attack_type": {
+            "en": "Insider Data Exfiltration",
+            "tr": "İçeriden Veri Çıkarma"
+        },
+        "summary": {
+            "en": "An internal user uploaded a large volume of files to an external cloud storage service outside of normal business hours",
+            "tr": "Dahili bir kullanıcı, normal çalışma saatleri dışında harici bir bulut depolama hizmetine büyük miktarda dosya yükledi"
+        },
+        "source_ip": "192.168.50.18",
+        "failed_attempts": 42,
+        "time_window": {
+            "en": "20 minutes",
+            "tr": "20 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Low upload volume",
+            "tr": "Düşük yükleme hacmi"
+        },
+        "observed": {
+            "en": "Massive data upload",
+            "tr": "Devasa veri yüklemesi"
+        },
+        "deviation": "High",
+        "confidence": 75,
+        "difficulty": "Medium"
+    },
+    "SCN_010": {
+        "attack_type": {
+            "en": "Worm-like Propagation",
+            "tr": "Solucan Benzeri Yayılma"
+        },
+        "summary": {
+            "en": "Multiple internal hosts attempted connections to the same uncommon TCP port on several internal systems within a short time frame",
+            "tr": "Birden fazla dahili ana bilgisayar, kısa bir zaman dilimi içinde çeşitli dahili sistemlerdeki aynı nadir TCP portuna bağlanmaya çalıştı"
+        },
+        "source_ip": "Multiple internal hosts",
+        "failed_attempts": 85,
+        "time_window": {
+            "en": "10 minutes",
+            "tr": "10 dakika"
+        },
+        "severity": "CRITICAL",
+        "baseline": {
+            "en": "No lateral scan",
+            "tr": "Yanal tarama yok"
+        },
+        "observed": {
+            "en": "Rapid lateral spread",
+            "tr": "Hızlı yanal yayılma"
+        },
+        "deviation": "Critical",
+        "confidence": 99,
+        "difficulty": "Easy"
+    },
+    "SCN_011": {
+        "attack_type": {
+            "en": "MFA Fatigue Attack",
+            "tr": "MFA Yorgunluk Saldırısı"
+        },
+        "summary": {
+            "en": "An external IP triggered repeated MFA push notifications for a single user until a successful authentication occurred",
+            "tr": "Harici bir IP, başarılı bir kimlik doğrulama gerçekleşene kadar tek bir kullanıcı için tekrarlanan MFA anlık bildirimlerini tetikledi"
+        },
+        "source_ip": "198.51.100.77",
+        "failed_attempts": 18,
+        "time_window": {
+            "en": "6 minutes",
+            "tr": "6 dakika"
+        },
+        "severity": "CRITICAL",
+        "baseline": {
+            "en": "1-2 MFA prompts",
+            "tr": "1-2 MFA istemi"
+        },
+        "observed": {
+            "en": "18 MFA prompts",
+            "tr": "18 MFA istemi"
+        },
+        "deviation": "Critical",
+        "confidence": 96,
+        "difficulty": "Easy"
+    },
+    "SCN_012": {
+        "attack_type": {
+            "en": "Network Scanning Activity",
+            "tr": "Ağ Tarama Aktivitesi"
+        },
+        "summary": {
+            "en": "An internal security scanner performed TCP SYN scans against multiple servers across the network during a scheduled maintenance window, targeting common service ports",
+            "tr": "Dahili bir güvenlik tarayıcısı, planlı bir bakım aralığı sırasında ağdaki birden fazla sunucuya karşı TCP SYN taramaları gerçekleştirdi"
+        },
+        "source_ip": "10.10.5.12",
+        "failed_attempts": 420,
+        "time_window": {
+            "en": "25 minutes",
+            "tr": "25 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "No scans",
+            "tr": "Tarama yok"
+        },
+        "observed": {
+            "en": "Authorized scanner IP",
+            "tr": "Yetkili tarayıcı IP'si"
+        },
+        "deviation": "Low (Expected)",
+        "confidence": 98,
+        "difficulty": "Medium"
+    },
+    "SCN_013": {
+        "attack_type": {
+            "en": "Cloud File Synchronization Activity",
+            "tr": "Bulut Dosya Senkronizasyon Aktivitesi"
+        },
+        "summary": {
+            "en": "An internal user synchronized a large number of files to a sanctioned cloud storage service (OneDrive) following a device reimage during business hours",
+            "tr": "Dahili bir kullanıcı, mesai saatleri içinde cihazın yeniden görüntülenmesinin ardından büyük miktarda dosyayı onaylı bir bulut depolama hizmetine (OneDrive) senkronize etti"
+        },
+        "source_ip": "192.168.30.42",
+        "failed_attempts": 310,
+        "time_window": {
+            "en": "40 minutes",
+            "tr": "40 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Incremental sync",
+            "tr": "Artımlı senkronizasyon"
+        },
+        "observed": {
+            "en": "Full re-sync",
+            "tr": "Tam yeniden senkronizasyon"
+        },
+        "deviation": "Medium",
+        "confidence": 80,
+        "difficulty": "Medium"
+    },
+    "SCN_014": {
+        "attack_type": {
+            "en": "Administrative Lateral Movement",
+            "tr": "İdari Yanal Hareket"
+        },
+        "summary": {
+            "en": "A domain administrator authenticated to multiple internal servers using RDP and SMB during a scheduled patch deployment window",
+            "tr": "Bir etki alanı yöneticisi, planlı bir yama dağıtım aralığı sırasında RDP ve SMB kullanarak birden fazla dahili sunucuda kimlik doğrulaması yaptı"
+        },
+        "source_ip": "10.20.0.8",
+        "failed_attempts": 27,
+        "time_window": {
+            "en": "35 minutes",
+            "tr": "35 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Admin activity",
+            "tr": "Yönetici aktivitesi"
+        },
+        "observed": {
+            "en": "High volume admin logins",
+            "tr": "Yüksek hacimli yönetici girişleri"
+        },
+        "deviation": "Low (Context)",
+        "confidence": 85,
+        "difficulty": "Hard"
+    },
+    "SCN_015": {
+        "attack_type": {
+            "en": "LOLBins Abuse",
+            "tr": "LOLBins Kötüye Kullanımı"
+        },
+        "summary": {
+            "en": "An internal workstation executed PowerShell and certutil commands to download and execute remote content shortly after a phishing email was opened",
+            "tr": "Dahili bir iş istasyonu, bir kimlik avı e-postası açıldıktan kısa bir süre sonra uzak içeriği indirmek ve yürütmek için PowerShell ve certutil komutlarını çalıştırdı"
+        },
+        "source_ip": "192.168.60.33",
+        "failed_attempts": 6,
+        "time_window": {
+            "en": "4 minutes",
+            "tr": "4 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "No certutil downloads",
+            "tr": "Certutil indirmesi yok"
+        },
+        "observed": {
+            "en": "Certutil URLcache",
+            "tr": "Certutil URLcache"
+        },
+        "deviation": "High",
+        "confidence": 93,
+        "difficulty": "Easy"
+    },
+    "SCN_016": {
+        "attack_type": {
+            "en": "Suspicious Authentication from Anonymizer",
+            "tr": "Anonimleştiriciden Şüpheli Kimlik Doğrulama"
+        },
+        "summary": {
+            "en": "Multiple failed SSH login attempts from a known TOR exit node targeting a single user account",
+            "tr": "Bilinen bir TOR çıkış düğümünden tek bir kullanıcı hesabını hedef alan birden fazla başarısız SSH giriş denemesi"
+        },
+        "source_ip": "185.220.101.45",
+        "failed_attempts": 4,
+        "time_window": {
+            "en": "3 minutes",
+            "tr": "3 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Known geo-locations",
+            "tr": "Bilinen coğrafi konumlar"
+        },
+        "observed": {
+            "en": "Tor Exit Node",
+            "tr": "Tor Çıkış Düğümü"
+        },
+        "deviation": "High",
+        "confidence": 97,
+        "difficulty": "Easy"
+    },
+    "SCN_017": {
+        "attack_type": {
+            "en": "Unusual VPN Login Location",
+            "tr": "Olağandışı VPN Giriş Konumu"
+        },
+        "summary": {
+            "en": "A known employee successfully logged in to the corporate VPN from a new country shortly after traveling abroad",
+            "tr": "Bilinen bir çalışan, yurtdışına seyahat ettikten kısa bir süre sonra yeni bir ülkeden kurumsal VPN'e başarıyla giriş yaptı"
+        },
+        "source_ip": "203.0.113.88",
+        "failed_attempts": 1,
+        "time_window": {
+            "en": "5 minutes",
+            "tr": "5 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Home country",
+            "tr": "Ev ülke"
+        },
+        "observed": {
+            "en": "New country (Travel)",
+            "tr": "Yeni ülke (Seyahat)"
+        },
+        "deviation": "Medium",
+        "confidence": 60,
+        "difficulty": "Hard"
+    },
+    "SCN_018": {
+        "attack_type": {
+            "en": "Service Account Authentication Failures",
+            "tr": "Servis Hesabı Kimlik Doğrulama Hataları"
+        },
+        "summary": {
+            "en": "A service account generated repeated authentication failures after its password expired, impacting multiple scheduled tasks",
+            "tr": "Bir servis hesabı, parolası sona erdikten sonra tekrarlanan kimlik doğrulama hataları oluşturdu ve birden fazla zamanlanmış görevi etkiledi"
+        },
+        "source_ip": "10.30.0.15",
+        "failed_attempts": 25,
+        "time_window": {
+            "en": "20 minutes",
+            "tr": "20 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Successful auth",
+            "tr": "Başarılı kimlik doğrulama"
+        },
+        "observed": {
+            "en": "Expired password fails",
+            "tr": "Süresi dolmuş parola hatası"
+        },
+        "deviation": "High",
+        "confidence": 90,
+        "difficulty": "Medium"
+    },
+    "SCN_019": {
+        "attack_type": {
+            "en": "Cloud Password Spraying",
+            "tr": "Bulut Parola Püskürtme"
+        },
+        "summary": {
+            "en": "Multiple Azure AD user accounts received a single failed authentication attempt from the same external IP over a short period",
+            "tr": "Birden fazla Azure AD kullanıcı hesabı, kısa bir süre içinde aynı harici IP'den tek bir başarısız kimlik doğrulama denemesi aldı"
+        },
+        "source_ip": "198.51.100.122",
+        "failed_attempts": 12,
+        "time_window": {
+            "en": "7 minutes",
+            "tr": "7 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Unique user failures",
+            "tr": "Benzersiz kullanıcı hataları"
+        },
+        "observed": {
+            "en": "1 IP -> 12 Accounts",
+            "tr": "1 IP -> 12 Hesap"
+        },
+        "deviation": "High",
+        "confidence": 94,
+        "difficulty": "Easy"
+    },
+    "SCN_020": {
+        "attack_type": {
+            "en": "Post Password Reset Authentication Failure",
+            "tr": "Parola Sıfırlama Sonrası Kimlik Doğrulama Hatası"
+        },
+        "summary": {
+            "en": "A user generated several failed login attempts immediately after resetting their password, followed by a successful authentication",
+            "tr": "Bir kullanıcı, parolasını sıfırladıktan hemen sonra birkaç başarısız giriş denemesi oluşturdu ve ardından başarılı bir kimlik doğrulama gerçekleştirdi"
+        },
+        "source_ip": "192.168.40.21",
+        "failed_attempts": 5,
+        "time_window": {
+            "en": "6 minutes",
+            "tr": "6 dakika"
+        },
+        "severity": "LOW",
+        "baseline": {
+            "en": "Successful login",
+            "tr": "Başarılı giriş"
+        },
+        "observed": {
+            "en": "Confusion post-reset",
+            "tr": "Sıfırlama sonrası karışıklık"
+        },
+        "deviation": "Low",
+        "confidence": 70,
+        "difficulty": "Easy"
+    },
+    "SCN_021": {
+        "attack_type": {
+            "en": "Slow Port Scanning",
+            "tr": "Yavaş Port Tarama"
+        },
+        "summary": {
+            "en": "An external IP attempted connections to multiple different ports on the same host over a two-hour period",
+            "tr": "Bir harici IP, iki saatlik bir süre boyunca aynı ana bilgisayardaki birden fazla farklı porta bağlanmaya çalıştı"
+        },
+        "source_ip": "91.204.181.76",
+        "failed_attempts": 18,
+        "time_window": {
+            "en": "2 hours",
+            "tr": "2 saat"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "No unexpected connection",
+            "tr": "Beklenmeyen bağlantı yok"
+        },
+        "observed": {
+            "en": "Time-distributed scan",
+            "tr": "Zamana yayılmış tarama"
+        },
+        "deviation": "Medium",
+        "confidence": 82,
+        "difficulty": "Medium"
+    },
+    "SCN_022": {
+        "attack_type": {
+            "en": "Internal Monitoring Activity",
+            "tr": "Dahili İzleme Aktivitesi"
+        },
+        "summary": {
+            "en": "An internal monitoring system periodically probed common service ports on multiple servers to verify availability",
+            "tr": "Dahili bir izleme sistemi, kullanılabilirliği doğrulamak için birden fazla sunucudaki yaygın servis portlarını periyodik olarak yokladı"
+        },
+        "source_ip": "10.1.5.20",
+        "failed_attempts": 60,
+        "time_window": {
+            "en": "3 hours",
+            "tr": "3 saat"
+        },
+        "severity": "LOW",
+        "baseline": {
+            "en": "Routine health checks",
+            "tr": "Rutin sağlık kontrolleri"
+        },
+        "observed": {
+            "en": "Consistent pattern",
+            "tr": "Tutarlı desen"
+        },
+        "deviation": "None",
+        "confidence": 99,
+        "difficulty": "Easy"
+    },
+    "SCN_023": {
+        "attack_type": {
+            "en": "Web Directory Enumeration",
+            "tr": "Web Dizin Numaralandırma"
+        },
+        "summary": {
+            "en": "An external IP generated hundreds of HTTP requests for non-existent directories on a web server within a short time window",
+            "tr": "Bir harici IP, kısa bir zaman dilimi içinde bir web sunucusundaki mevcut olmayan dizinler için yüzlerce HTTP isteği oluşturdu"
+        },
+        "source_ip": "146.70.89.12",
+        "failed_attempts": 230,
+        "time_window": {
+            "en": "5 minutes",
+            "tr": "5 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Low 404 rate",
+            "tr": "Düşük 404 oranı"
+        },
+        "observed": {
+            "en": "High 404 volume",
+            "tr": "Yüksek 404 hacmi"
+        },
+        "deviation": "High",
+        "confidence": 95,
+        "difficulty": "Easy"
+    },
+    "SCN_024": {
+        "attack_type": {
+            "en": "CDN Health Check Activity",
+            "tr": "CDN Sağlık Kontrolü Aktivitesi"
+        },
+        "summary": {
+            "en": "Multiple HTTP requests to various application endpoints originated from known CDN IP ranges as part of routine health checks",
+            "tr": "Rutin sağlık kontrollerinin bir parçası olarak, bilinen CDN IP aralıklarından çeşitli uygulama uç noktalarına birden fazla HTTP isteği geldi"
+        },
+        "source_ip": "CDN IP ranges",
+        "failed_attempts": 150,
+        "time_window": {
+            "en": "30 minutes",
+            "tr": "30 dakika"
+        },
+        "severity": "LOW",
+        "baseline": {
+            "en": "Regular checks",
+            "tr": "Düzenli kontroller"
+        },
+        "observed": {
+            "en": "Whitelisted IPs",
+            "tr": "İzin verilen IP'ler"
+        },
+        "deviation": "None",
+        "confidence": 98,
+        "difficulty": "Easy"
+    },
+    "SCN_025": {
+        "attack_type": {
+            "en": "API Enumeration",
+            "tr": "API Numaralandırma"
+        },
+        "summary": {
+            "en": "An external IP sent repeated requests to multiple API endpoints, receiving 401 and 403 responses while iterating through versioned paths",
+            "tr": "Bir harici IP, sürümlü yolları yinelerken 401 ve 403 yanıtları alarak birden fazla API uç noktasına tekrarlanan istekler gönderdi"
+        },
+        "source_ip": "62.210.85.19",
+        "failed_attempts": 95,
+        "time_window": {
+            "en": "8 minutes",
+            "tr": "8 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Valid API calls",
+            "tr": "Geçerli API çağrıları"
+        },
+        "observed": {
+            "en": "401/403 Errors",
+            "tr": "401/403 Hataları"
+        },
+        "deviation": "High",
+        "confidence": 91,
+        "difficulty": "Medium"
+    },
+    "SCN_026": {
+        "attack_type": {
+            "en": "SMB Lateral Movement",
+            "tr": "SMB Yanal Hareket"
+        },
+        "summary": {
+            "en": "A compromised workstation initiated SMB authentication attempts to multiple internal servers within a short time frame",
+            "tr": "Ele geçirilmiş bir iş istasyonu, kısa bir zaman dilimi içinde birden fazla dahili sunucuya SMB kimlik doğrulama denemeleri başlattı"
+        },
+        "source_ip": "192.168.70.14",
+        "failed_attempts": 22,
+        "time_window": {
+            "en": "12 minutes",
+            "tr": "12 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Workstation -> DC",
+            "tr": "İş istasyonu -> DC"
+        },
+        "observed": {
+            "en": "Workstation -> Servers",
+            "tr": "İş istasyonu -> Sunucular"
+        },
+        "deviation": "High",
+        "confidence": 89,
+        "difficulty": "Medium"
+    },
+    "SCN_027": {
+        "attack_type": {
+            "en": "Administrative RDP Activity",
+            "tr": "İdari RDP Aktivitesi"
+        },
+        "summary": {
+            "en": "A domain administrator initiated multiple RDP sessions to different servers while responding to an active security incident",
+            "tr": "Bir etki alanı yöneticisi, aktif bir güvenlik olayına yanıt verirken farklı sunuculara birden fazla RDP oturumu başlattı"
+        },
+        "source_ip": "10.50.0.9",
+        "failed_attempts": 14,
+        "time_window": {
+            "en": "40 minutes",
+            "tr": "40 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Admin RDP",
+            "tr": "Yönetici RDP"
+        },
+        "observed": {
+            "en": "Incident Response",
+            "tr": "Olay Müdahale"
+        },
+        "deviation": "Contextual",
+        "confidence": 85,
+        "difficulty": "Hard"
+    },
+    "SCN_028": {
+        "attack_type": {
+            "en": "Lateral Movement via PsExec",
+            "tr": "PsExec ile Yanal Hareket"
+        },
+        "summary": {
+            "en": "Following a phishing email interaction, PsExec was used from a compromised workstation to execute commands on multiple internal servers",
+            "tr": "Bir kimlik avı e-postası etkileşiminin ardından, ele geçirilmiş bir iş istasyonundan birden fazla dahili sunucuda komut yürütmek için PsExec kullanıldı"
+        },
+        "source_ip": "192.168.70.22",
+        "failed_attempts": 9,
+        "time_window": {
+            "en": "15 minutes",
+            "tr": "15 dakika"
+        },
+        "severity": "CRITICAL",
+        "baseline": {
+            "en": "No PsExec",
+            "tr": "PsExec yok"
+        },
+        "observed": {
+            "en": "PsExec usage",
+            "tr": "PsExec kullanımı"
+        },
+        "deviation": "Critical",
+        "confidence": 99,
+        "difficulty": "Easy"
+    },
+    "SCN_029": {
+        "attack_type": {
+            "en": "Backup Agent Network Activity",
+            "tr": "Yedekleme Aracısı Ağ Aktivitesi"
+        },
+        "summary": {
+            "en": "A backup agent server initiated authenticated connections to multiple internal systems as part of a scheduled backup operation",
+            "tr": "Bir yedekleme aracısı sunucusu, planlı bir yedekleme işleminin parçası olarak birden fazla dahili sisteme kimliği doğrulanmış bağlantılar başlattı"
+        },
+        "source_ip": "10.60.0.5",
+        "failed_attempts": 34,
+        "time_window": {
+            "en": "50 minutes",
+            "tr": "50 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Scheduled backups",
+            "tr": "Zamanlanmış yedeklemeler"
+        },
+        "observed": {
+            "en": "Backup traffic",
+            "tr": "Yedekleme trafiği"
+        },
+        "deviation": "None",
+        "confidence": 96,
+        "difficulty": "Easy"
+    },
+    "SCN_030": {
+        "attack_type": {
+            "en": "Kerberoasting Activity",
+            "tr": "Kerberoasting Aktivitesi"
+        },
+        "summary": {
+            "en": "A single workstation requested Kerberos service tickets for multiple service accounts within a short time frame",
+            "tr": "Tek bir iş istasyonu, kısa bir zaman dilimi içinde birden fazla servis hesabı için Kerberos servis biletleri talep etti"
+        },
+        "source_ip": "192.168.80.19",
+        "failed_attempts": 11,
+        "time_window": {
+            "en": "10 minutes",
+            "tr": "10 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Specific tickets",
+            "tr": "Belirli biletler"
+        },
+        "observed": {
+            "en": "Mass ticket request",
+            "tr": "Toplu bilet isteği"
+        },
+        "deviation": "High",
+        "confidence": 92,
+        "difficulty": "Medium"
+    },
+    "SCN_031": {
+        "attack_type": {
+            "en": "Suspicious PowerShell Execution",
+            "tr": "Şüpheli PowerShell Yürütme"
+        },
+        "summary": {
+            "en": "A user workstation executed a PowerShell command with base64-encoded arguments shortly after opening an email attachment",
+            "tr": "Bir kullanıcı iş istasyonu, bir e-posta eki açıldıktan kısa bir süre sonra base64 kodlu argümanlarla bir PowerShell komutu yürüttü"
+        },
+        "source_ip": "192.168.90.14",
+        "failed_attempts": 1,
+        "time_window": {
+            "en": "3 minutes",
+            "tr": "3 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Clean scripts",
+            "tr": "Temiz betikler"
+        },
+        "observed": {
+            "en": "Encoded args",
+            "tr": "Kodlanmış argümanlar"
+        },
+        "deviation": "High",
+        "confidence": 95,
+        "difficulty": "Easy"
+    },
+    "SCN_032": {
+        "attack_type": {
+            "en": "Database Export Activity",
+            "tr": "Veritabanı Dışa Aktarma Aktivitesi"
+        },
+        "summary": {
+            "en": "A database administrator exported a large dataset from a production database during a scheduled reporting task",
+            "tr": "Bir veritabanı yöneticisi, planlı bir raporlama görevi sırasında bir üretim veritabanından büyük bir veri kümesini dışa aktardı"
+        },
+        "source_ip": "10.90.0.21",
+        "failed_attempts": 1,
+        "time_window": {
+            "en": "45 minutes",
+            "tr": "45 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Scheduled exports",
+            "tr": "Zamanlanmış dışa aktarımlar"
+        },
+        "observed": {
+            "en": "Large dump",
+            "tr": "Büyük döküm"
+        },
+        "deviation": "Expected",
+        "confidence": 88,
+        "difficulty": "Medium"
+    },
+    "SCN_033": {
+        "attack_type": {
+            "en": "Impossible Travel Alert",
+            "tr": "İmkansız Seyahat Uyarısı"
+        },
+        "summary": {
+            "en": "A user account logged in from two distant locations within a short time window due to VPN usage",
+            "tr": "Bir kullanıcı hesabı, VPN kullanımı nedeniyle kısa bir zaman dilimi içinde iki uzak konumdan giriş yaptı"
+        },
+        "source_ip": "Multiple locations",
+        "failed_attempts": 0,
+        "time_window": {
+            "en": "10 minutes",
+            "tr": "10 dakika"
+        },
+        "severity": "LOW",
+        "baseline": {
+            "en": "Single location",
+            "tr": "Tek konum"
+        },
+        "observed": {
+            "en": "Geo-velocity violation",
+            "tr": "Coğrafi hız ihlali"
+        },
+        "deviation": "Medium",
+        "confidence": 75,
+        "difficulty": "Hard"
+    },
+    "SCN_034": {
+        "attack_type": {
+            "en": "Persistence via Scheduled Task",
+            "tr": "Zamanlanmış Görev ile Kalıcılık"
+        },
+        "summary": {
+            "en": "A scheduled task was created on a workstation to execute a script from a temporary directory at system startup",
+            "tr": "Sistem başlangıcında geçici bir dizinden bir betik yürütmek için bir iş istasyonunda zamanlanmış bir görev oluşturuldu"
+        },
+        "source_ip": "192.168.91.55",
+        "failed_attempts": 1,
+        "time_window": {
+            "en": "5 minutes",
+            "tr": "5 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "No task creation",
+            "tr": "Görev oluşturma yok"
+        },
+        "observed": {
+            "en": "Task -> Temp Dir",
+            "tr": "Görev -> Temp Dizin"
+        },
+        "deviation": "High",
+        "confidence": 93,
+        "difficulty": "Easy"
+    },
+    "SCN_035": {
+        "attack_type": {
+            "en": "Unusual DNS Activity",
+            "tr": "Olağandışı DNS Aktivitesi"
+        },
+        "summary": {
+            "en": "A browser extension generated a high volume of DNS queries to tracking domains during normal browsing activity",
+            "tr": "Bir tarayıcı uzantısı, normal tarama etkinliği sırasında izleme etki alanlarına yüksek hacimli DNS sorguları oluşturdu"
+        },
+        "source_ip": "192.168.92.18",
+        "failed_attempts": 180,
+        "time_window": {
+            "en": "20 minutes",
+            "tr": "20 dakika"
+        },
+        "severity": "LOW",
+        "baseline": {
+            "en": "Normal browsing",
+            "tr": "Normal tarama"
+        },
+        "observed": {
+            "en": "Adware DNS",
+            "tr": "Reklam Yazılımı DNS"
+        },
+        "deviation": "Low",
+        "confidence": 85,
+        "difficulty": "Hard"
+    },
+    "SCN_036": {
+        "attack_type": {
+            "en": "Suspicious Outbound Network Connection",
+            "tr": "Şüpheli Giden Ağ Bağlantısı"
+        },
+        "summary": {
+            "en": "An internal server initiated outbound HTTPS connections to an ASN not previously seen in the environment",
+            "tr": "Dahili bir sunucu, ortamda daha önce görülmemiş bir ASN'ye giden HTTPS bağlantıları başlattı"
+        },
+        "source_ip": "192.168.100.10",
+        "failed_attempts": 12,
+        "time_window": {
+            "en": "30 minutes",
+            "tr": "30 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Known ASNs",
+            "tr": "Bilinen ASN'ler"
+        },
+        "observed": {
+            "en": "New ASN",
+            "tr": "Yeni ASN"
+        },
+        "deviation": "High",
+        "confidence": 90,
+        "difficulty": "Medium"
+    },
+    "SCN_037": {
+        "attack_type": {
+            "en": "Software Update Activity",
+            "tr": "Yazılım Güncelleme Aktivitesi"
+        },
+        "summary": {
+            "en": "Multiple endpoints downloaded large update packages from a new CDN provider following a vendor change",
+            "tr": "Bir satıcı değişikliğinin ardından birden fazla uç nokta, yeni bir CDN sağlayıcısından büyük güncelleme paketleri indirdi"
+        },
+        "source_ip": "Multiple endpoints",
+        "failed_attempts": 0,
+        "time_window": {
+            "en": "1 hour",
+            "tr": "1 saat"
+        },
+        "severity": "LOW",
+        "baseline": {
+            "en": "Known Update Sources",
+            "tr": "Bilinen Güncelleme Kaynakları"
+        },
+        "observed": {
+            "en": "New CDN Source",
+            "tr": "Yeni CDN Kaynağı"
+        },
+        "deviation": "Low",
+        "confidence": 95,
+        "difficulty": "Easy"
+    },
+    "SCN_038": {
+        "attack_type": {
+            "en": "Account Lockout Attack",
+            "tr": "Hesap Kilitleme Saldırısı"
+        },
+        "summary": {
+            "en": "Multiple user accounts were locked out after repeated authentication failures from the same external IP",
+            "tr": "Aynı harici IP'den tekrarlanan kimlik doğrulama hatalarından sonra birden fazla kullanıcı hesabı kilitlendi"
+        },
+        "source_ip": "77.88.9.44",
+        "failed_attempts": 60,
+        "time_window": {
+            "en": "8 minutes",
+            "tr": "8 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "Rare lockouts",
+            "tr": "Nadir kilitlemeler"
+        },
+        "observed": {
+            "en": "Mass lockouts",
+            "tr": "Toplu kilitlemeler"
+        },
+        "deviation": "High",
+        "confidence": 97,
+        "difficulty": "Easy"
+    },
+    "SCN_039": {
+        "attack_type": {
+            "en": "Email Persistence Technique",
+            "tr": "E-posta Kalıcılık Tekniği"
+        },
+        "summary": {
+            "en": "An inbox rule was created to automatically forward emails to an external address without user awareness",
+            "tr": "Kullanıcının haberi olmadan e-postaları harici bir adrese otomatik olarak iletmek için bir gelen kutusu kuralı oluşturuldu"
+        },
+        "source_ip": "O365 Audit Logs",
+        "failed_attempts": 1,
+        "time_window": {
+            "en": "2 minutes",
+            "tr": "2 dakika"
+        },
+        "severity": "HIGH",
+        "baseline": {
+            "en": "No forwarding rules",
+            "tr": "İletme kuralı yok"
+        },
+        "observed": {
+            "en": "External forwarding",
+            "tr": "Harici iletme"
+        },
+        "deviation": "High",
+        "confidence": 98,
+        "difficulty": "Easy"
+    },
+    "SCN_040": {
+        "attack_type": {
+            "en": "Internal API Misuse",
+            "tr": "Dahili API Kötüye Kullanımı"
+        },
+        "summary": {
+            "en": "An internal application made repeated unauthorized API calls due to a misconfigured authentication token",
+            "tr": "Dahili bir uygulama, yanlış yapılandırılmış bir kimlik doğrulama belirteci nedeniyle tekrarlanan yetkisiz API çağrıları yaptı"
+        },
+        "source_ip": "10.120.0.7",
+        "failed_attempts": 75,
+        "time_window": {
+            "en": "25 minutes",
+            "tr": "25 dakika"
+        },
+        "severity": "MEDIUM",
+        "baseline": {
+            "en": "Authenticated calls",
+            "tr": "Doğrulanmış çağrılar"
+        },
+        "observed": {
+            "en": "Invalid token loop",
+            "tr": "Geçersiz belirteç döngüsü"
+        },
+        "deviation": "Medium",
+        "confidence": 85,
+        "difficulty": "Medium"
+    }
+}

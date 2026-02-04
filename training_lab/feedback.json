@@ -1,0 +1,882 @@
+{
+    "SCN_001": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "This scenario does not meet brute force thresholds. A low number of failed attempts is often caused by user error.",
+                "tr": "Bu senaryo kaba kuvvet eşiklerini karşılamıyor. Düşük sayıdaki başarısız deneme genellikle kullanıcı hatasından kaynaklanır."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why this is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "Three failed login attempts within a short time window are common and usually do not indicate malicious activity.",
+                "tr": "Kısa bir zaman aralığında üç başarısız giriş denemesi yaygındır ve genellikle kötü amaçlı aktiviteye işaret etmez."
+            }
+        }
+    },
+    "SCN_002": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Seven failed SSH login attempts within 30 seconds strongly indicate automated brute force activity.",
+                "tr": "30 saniye içinde yedi başarısız SSH giriş denemesi, otomatik kaba kuvvet aktivitesini güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why this is NOT a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "The high frequency and short time window exceed normal user behavior thresholds.",
+                "tr": "Yüksek frekans ve kısa zaman aralığı, normal kullanıcı davranışı eşiklerini aşar."
+            }
+        }
+    },
+    "SCN_003": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is NOT a Clear True Positive",
+                "tr": "Neden Bu Net Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although multiple failed login attempts occurred, they were spread over a long time window. This pattern does not match typical brute force behavior, which is usually fast and repetitive.",
+                "tr": "Birden fazla başarısız giriş denemesi gerçekleşmesine rağmen, bunlar uzun bir zaman dilimine yayılmıştır. Bu desen, genellikle hızlı ve tekrarlayıcı olan tipik kaba kuvvet davranışıyla eşleşmez."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why this is Considered a False Positive",
+                "tr": "Neden Bu Yanlış Pozitif Olarak Kabul Edilir"
+            },
+            "message": {
+                "en": "Slow and distributed failed login attempts (e.g., < 1 per minute) usually indicate misconfigured services rather than an active attack. SOC analysts should verify whether the source IP belongs to an internal system before escalating.",
+                "tr": "Yavaş ve dağıtık başarısız giriş denemeleri (örn. dakikada < 1) genellikle aktif bir saldırıdan ziyade yanlış yapılandırılmış servisleri gösterir. SOC analistleri, yükseltmeden önce kaynak IP'nin dahili bir sisteme ait olup olmadığını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_004": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Password spraying attacks distribute authentication attempts across many users using a single password. This pattern is designed to avoid detection and account lockout, making it a high-risk attack despite the low attempt count per user.",
+                "tr": "Parola püskürtme saldırıları, tek bir parola kullanarak kimlik doğrulama denemelerini birçok kullanıcıya dağıtır. Bu desen, tespitten ve hesap kilitlemeden kaçınmak için tasarlanmıştır, bu da kullanıcı başına düşük deneme sayısına rağmen onu yüksek riskli bir saldırı yapar."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why this is NOT a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Legitimate user activity does not typically involve a single source attempting authentication across multiple accounts in a short time window. This behavior strongly suggests malicious intent.",
+                "tr": "Meşru kullanıcı aktivitesi genellikle tek bir kaynağın kısa bir süre içinde birden fazla hesapta kimlik doğrulaması denemesini içermez. Bu davranış kötü niyetli bir amacı güçlü bir şekilde gösterir."
+            }
+        }
+    },
+    "SCN_005": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Scanning a wide range of ports on a host within a short time window is a common reconnaissance technique used by attackers to identify exposed services before exploitation.",
+                "tr": "Kısa bir süre içinde bir ana bilgisayarda geniş bir port aralığını taramak, saldırganların sömürüden önce açık servisleri belirlemek için kullandığı yaygın bir keşif tekniğidir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Automated vulnerability scanners and monitoring tools can generate similar traffic. SOC analysts should verify whether the source IP belongs to an authorized scanning service or internal security tool.",
+                "tr": "Otomatik zafiyet tarayıcıları ve izleme araçları benzer trafik üretebilir. SOC analistleri, kaynak IP'nin yetkili bir tarama servisine veya dahili güvenlik aracına ait olup olmadığını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_006": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "When a successful authentication follows repeated failed attempts from the same source, it indicates that the attacker likely guessed or obtained valid credentials. This requires immediate incident response. (Severity High: Confirmed Compromise)",
+                "tr": "Aynı kaynaktan tekrarlanan başarısız denemelerin ardından başarılı bir kimlik doğrulama geldiğinde, bu saldırganın muhtemelen geçerli kimlik bilgilerini tahmin ettiğini veya elde ettiğini gösterir. Bu durum acil olay müdahalesi gerektirir. (Önem Derecesi Yüksek: Doğrulanmış Tehlike)"
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why this is NOT a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Legitimate users rarely fail authentication many times before suddenly succeeding from the same source. This pattern strongly suggests credential compromise.",
+                "tr": "Meşru kullanıcılar aynı kaynaktan aniden başarılı olmadan önce nadiren birçok kez kimlik doğrulama hatası yaparlar. Bu desen, kimlik bilgilerinin tehlikeye girdiğini güçlü bir şekilde gösterir."
+            }
+        }
+    },
+    "SCN_007": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "DNS tunneling abuses the DNS protocol to bypass security controls. The high number of long, random subdomain queries to a single external domain strongly indicates covert data exfiltration.",
+                "tr": "DNS tünelleme, güvenlik kontrollerini atlatmak için DNS protokolünü kötüye kullanır. Tek bir harici alana yapılan çok sayıda uzun, rastgele alt alan adı sorgusu, gizli veri hırsızlığını güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some legitimate services such as CDN tracking, telemetry, or security products may generate long DNS queries. Analysts should validate the destination domain and inspect query entropy before escalating.",
+                "tr": "CDN izleme, telemetri veya güvenlik ürünleri gibi bazı meşru servisler uzun DNS sorguları üretebilir. Analistler, yükseltmeden önce hedef alan adını doğrulamalı ve sorgu entropisini incelemelidir."
+            }
+        }
+    },
+    "SCN_008": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "C2 beaconing relies on predictable communication intervals to maintain control over compromised hosts. The consistent timing and destination strongly indicate malware presence.",
+                "tr": "C2 beaconing (işaret fişekleri), tehlikeye atılmış ana bilgisayarlar üzerinde kontrolü sürdürmek için öngörülebilir iletişim aralıklarına güvenir. Tutarlı zamanlama ve hedef, kötü amaçlı yazılım varlığını güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some legitimate services perform regular health checks or updates. Analysts should correlate with application inventory and threat intelligence before taking action.",
+                "tr": "Bazı meşru servisler düzenli sağlık kontrolleri veya güncellemeler yapar. Analistler, harekete geçmeden önce uygulama envanteri ve tehdit istihbaratı ile ilişkilendirmelidir."
+            }
+        }
+    },
+    "SCN_009": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Insider threats often manifest as deviations from normal user behavior. Large data uploads to external services outside working hours strongly suggest intentional or negligent data exfiltration.",
+                "tr": "İçeriden gelen tehditler genellikle normal kullanıcı davranışından sapmalar olarak kendini gösterir. Mesai saatleri dışında harici servislere yapılan büyük veri yüklemeleri, kasıtlı veya ihmalkar veri hırsızlığını güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some users may work overtime or perform legitimate backups. Analysts should correlate with user role, historical behavior, and change management records before escalation.",
+                "tr": "Bazı kullanıcılar fazla mesai yapabilir veya meşru yedeklemeler gerçekleştirebilir. Analistler, yükseltmeden önce kullanıcı rolü, geçmiş davranışlar ve değişiklik yönetimi kayıtları ile ilişkilendirmelidir."
+            }
+        }
+    },
+    "SCN_010": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Worm-like malware propagates by automatically scanning and exploiting multiple hosts simultaneously. Identical connection patterns across many systems strongly indicate self-propagating malware. (Severity Critical: Rapid Propagation)",
+                "tr": "Solucan benzeri kötü amaçlı yazılımlar, aynı anda birden fazla ana bilgisayarı otomatik olarak tarayarak ve istismar ederek yayılır. Birçok sistemdeki aynı bağlantı desenleri, kendi kendine yayılan kötü amaçlı yazılımı güçlü bir şekilde gösterir. (Önem Derecesi Kritik: Hızlı Yayılma)"
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some legitimate distributed management tools may show similar behavior. Analysts should verify whether the activity aligns with authorized administrative operations.",
+                "tr": "Bazı meşru dağıtık yönetim araçları benzer davranışlar gösterebilir. Analistler, aktivitenin yetkili idari işlemlerle uyumlu olup olmadığını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_011": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "MFA fatigue attacks exploit human behavior rather than technical weaknesses. Repeated push requests followed by a successful authentication strongly indicate unauthorized access through social engineering. (Severity Critical: Confirmed Access Attempt)",
+                "tr": "MFA yorgunluğu saldırıları teknik zayıflıklardan ziyade insan davranışını istismar eder. Başarılı bir kimlik doğrulamasıyla sonuçlanan tekrarlanan push istekleri, sosyal mühendislik yoluyla yetkisiz erişimi güçlü bir şekilde gösterir. (Önem Derecesi Kritik: Doğrulanmış Erişim Girişimi)"
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Users may accidentally trigger multiple MFA prompts during login issues. Analysts should confirm whether the user reported MFA anomalies before escalation.",
+                "tr": "Kullanıcılar giriş sorunları sırasında yanlışlıkla birden fazla MFA istemini tetikleyebilir. Analistler, yükseltmeden önce kullanıcının MFA anormallikleri bildirip bildirmediğini doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_012": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although the scan activity appears aggressive, the source IP belongs to an internal security scanner and the activity occurred during a planned maintenance window. This behavior is consistent with authorized vulnerability assessments.",
+                "tr": "Tarama aktivitesi agresif görünse de, kaynak IP dahili bir güvenlik tarayıcısına aittir ve aktivite planlı bir bakım penceresi sırasında gerçekleşmiştir. Bu davranış, yetkili zafiyet değerlendirmeleriyle tutarlıdır."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts must validate scanning activity against asset inventories and change management records. In this case, the scan aligns with approved security operations and should be closed as a false positive.",
+                "tr": "SOC analistleri tarama aktivitesini varlık envanterleri ve değişiklik yönetimi kayıtlarına göre doğrulamalıdır. Bu durumda tarama, onaylanmış güvenlik operasyonlarıyla uyumludur ve yanlış pozitif olarak kapatılmalıdır."
+            }
+        }
+    },
+    "SCN_013": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "While large data uploads can indicate exfiltration, this activity matches a known and legitimate cloud synchronization pattern following a device reimage using an approved service.",
+                "tr": "Büyük veri yüklemeleri veri hırsızlığını işaret edebilse de, bu aktivite onaylanmış bir servis kullanılarak yapılan cihaz yeniden kurulumunun ardından bilinen ve meşru bir bulut senkronizasyon deseniyle eşleşmektedir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should validate cloud traffic against sanctioned applications, recent device changes, and user behavior baselines. In this case, the activity aligns with normal OneDrive synchronization behavior.",
+                "tr": "SOC analistleri bulut trafiğini onaylı uygulamalar, son cihaz değişiklikleri ve kullanıcı davranış temellerine göre doğrulamalıdır. Bu durumda aktivite, normal OneDrive senkronizasyon davranışıyla uyumludur."
+            }
+        }
+    },
+    "SCN_014": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although the activity resembles lateral movement, the source account has administrative privileges and the access occurred during a scheduled maintenance window, which aligns with legitimate administrative behavior.",
+                "tr": "Aktivite yatay hareketi andırsa da, kaynak hesap yönetici ayrıcalıklarına sahiptir ve erişim planlı bir bakım penceresi sırasında gerçekleşmiştir, bu da meşru idari davranışla uyumludur."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should validate lateral authentication activity against change management records and privileged account roles. In this case, the behavior is consistent with authorized administrative tasks.",
+                "tr": "SOC analistleri yatay kimlik doğrulama aktivitesini değişiklik yönetimi kayıtları ve ayrıcalıklı hesap rolleri ile doğrulamalıdır. Bu durumda davranış, yetkili idari görevlerle tutarlıdır."
+            }
+        }
+    },
+    "SCN_015": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Attackers frequently abuse trusted system binaries such as PowerShell and certutil to evade detection. The execution of download-and-execute commands shortly after a phishing event strongly indicates malicious activity.",
+                "tr": "Saldırganlar tespitten kaçınmak için sık sık PowerShell ve certutil gibi güvenilir sistem dosyalarını kötüye kullanır. Bir oltalama olayından kısa bir süre sonra indir-ve-çalıştır komutlarının yürütülmesi, kötü amaçlı aktiviteyi güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some administrators may use these tools for legitimate tasks. Analysts should review command-line arguments, parent processes, and user context before confirming malicious intent.",
+                "tr": "Bazı yöneticiler bu araçları meşru görevler için kullanabilir. Analistler, kötü niyetli amacı doğrulamadan önce komut satırı argümanlarını, üst süreçleri ve kullanıcı bağlamını incelemelidir."
+            }
+        }
+    },
+    "SCN_016": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Even a small number of authentication attempts from a TOR exit node is highly suspicious. Attackers commonly use anonymization services to hide their origin during credential attacks.",
+                "tr": "Bir TOR çıkış düğümünden gelen az sayıda kimlik doğrulama denemesi bile oldukça şüphelidir. Saldırganlar, kimlik bilgisi saldırıları sırasında kökenlerini gizlemek için yaygın olarak anonimleştirme servislerini kullanır."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Could Be Mistaken as a False Positive",
+                "tr": "Neden Bu Yanlış Pozitif Olarak Algılanabilir"
+            },
+            "message": {
+                "en": "In rare cases, privacy-conscious users may use anonymization tools. Analysts should confirm whether TOR access is explicitly allowed by policy before closing the alert.",
+                "tr": "Nadir durumlarda, gizliliğe önem veren kullanıcılar anonimleştirme araçları kullanabilir. Analistler, uyarıyı kapatmadan önce TOR erişimine politika tarafından açıkça izin verildiğini doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_017": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although the login originated from a new country, the authentication was successful and associated with a known user account using the corporate VPN. This aligns with expected behavior during travel.",
+                "tr": "Giriş yeni bir ülkeden kaynaklansa da, kimlik doğrulama başarılı olmuş ve kurumsal VPN kullanan bilinen bir kullanıcı hesabıyla ilişkilendirilmiştir. Bu, seyahat sırasındaki beklenen davranışla uyumludur."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should validate unusual login locations against travel records and VPN usage policies. In this case, the activity is consistent with legitimate user behavior.",
+                "tr": "SOC analistleri olağandışı giriş konumlarını seyahat kayıtları ve VPN kullanım politikaları ile doğrulamalıdır. Bu durumda aktivite, meşru kullanıcı davranışıyla tutarlıdır."
+            }
+        }
+    },
+    "SCN_018": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although repeated authentication failures may resemble brute force attempts, the account involved is a service account affected by an expired password. This behavior is consistent with misconfiguration.",
+                "tr": "Tekrarlanan kimlik doğrulama hataları kaba kuvvet girişimlerini andırsa da, ilgili hesap parolası süresi dolmuş bir servis hesabıdır. Bu davranış yanlış yapılandırma ile tutarlıdır."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should identify account types and review password rotation policies. Service account failures following expiration should be remediated through configuration updates rather than incident escalation.",
+                "tr": "SOC analistleri hesap türlerini tanımlamalı ve parola rotasyon politikalarını gözden geçirmelidir. Süre dolumunu takiben servis hesabı hataları, olay yükseltme yerine yapılandırma güncellemeleri yoluyla düzeltilmelidir."
+            }
+        }
+    },
+    "SCN_019": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Password spraying in cloud environments often appears as isolated authentication failures across many users. This pattern is a well-known technique used to bypass account lockout protections.",
+                "tr": "Bulut ortamlarında parola püskürtme genellikle birçok kullanıcıda izole edilmiş kimlik doğrulama hataları olarak görünür. Bu desen, hesap kilitleme korumalarını atlatmak için kullanılan iyi bilinen bir tekniktir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Bulk login issues following identity provider outages can resemble password spraying. Analysts should correlate with service health alerts before escalation.",
+                "tr": "Kimlik sağlayıcı kesintilerini takiben toplu giriş sorunları parola püskürtmeyi andırabilir. Analistler, yükseltmeden önce servis sağlık uyarıları ile ilişkilendirmelidir."
+            }
+        }
+    },
+    "SCN_020": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Failed logins occurring immediately after a password reset are commonly caused by user confusion or cached credentials rather than malicious activity.",
+                "tr": "Parola sıfırlamadan hemen sonra meydana gelen başarısız girişler, kötü amaçlı aktiviteden ziyade genellikle kullanıcı kafa karışıklığı veya önbelleğe alınmış kimlik bilgilerinden kaynaklanır."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should correlate authentication failures with recent password reset events. In this case, the successful login originated from the same user shortly after, confirming the failures were due to typo/cache issues.",
+                "tr": "SOC analistleri kimlik doğrulama hatalarını son parola sıfırlama olaylarıyla ilişkilendirmelidir. Bu durumda, kısa bir süre sonra aynı kullanıcıdan başarılı giriş yapılması, hataların yazım/önbellek sorunlarından kaynaklandığını doğrulamaktadır."
+            }
+        }
+    },
+    "SCN_021": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Attackers often perform slow scans to avoid triggering alerts. Multiple port probes from the same source over an extended period strongly indicate reconnaissance activity.",
+                "tr": "Saldırganlar uyarıları tetiklemekten kaçınmak için genellikle yavaş taramalar yaparlar. Aynı kaynaktan uzun bir süre boyunca yapılan birden fazla port taraması, keşif aktivitesini güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Occasional connectivity tests may appear similar. Analysts should verify whether the source IP belongs to monitoring services or partners before escalation.",
+                "tr": "Ara sıra yapılan bağlantı testleri benzer görünebilir. Analistler, yükseltmeden önce kaynak IP'nin izleme servislerine veya ortaklara ait olup olmadığını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_022": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although the traffic resembles scanning behavior, the source is an internal monitoring system performing routine availability checks.",
+                "tr": "Trafik tarama davranışını andırsa da, kaynak rutin erişilebilirlik kontrolleri yapan dahili bir izleme sistemidir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should maintain an inventory of internal monitoring tools and exclude their activity from security escalation workflows.",
+                "tr": "SOC analistleri dahili izleme araçlarının bir envanterini tutmalı ve bunların aktivitelerini güvenlik yükseltme iş akışlarından hariç tutmalıdır."
+            }
+        }
+    },
+    "SCN_023": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Directory brute force attacks are commonly used during reconnaissance to discover hidden endpoints. The high volume of 404 responses within a short period strongly indicates automated enumeration.",
+                "tr": "Dizin kaba kuvvet saldırıları, gizli uç noktaları keşfetmek için keşif sırasında yaygın olarak kullanılır. Kısa bir süre içinde yüksek hacimli 404 yanıtları, otomatik numaralandırmayı güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Occasional misconfigured crawlers or search engine bots may generate similar traffic. Analysts should validate user agents and request patterns before escalation.",
+                "tr": "Ara sıra yanlış yapılandırılmış tarayıcılar veya arama motoru botları benzer trafik üretebilir. Analistler, yükseltmeden önce kullanıcı aracılarını ve istek desenlerini doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_024": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although the request patterns resemble probing behavior, the traffic originates from known CDN infrastructure performing routine health checks.",
+                "tr": "İstek desenleri yoklama davranışını andırsa da, trafik rutin sağlık kontrolleri yapan bilinen CDN altyapısından kaynaklanmaktadır."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should whitelist trusted CDN IP ranges and review user-agent strings to prevent unnecessary escalation of health-check traffic.",
+                "tr": "SOC analistleri güvenilir CDN IP aralıklarını beyaz listeye almalı ve sağlık kontrolü trafiğinin gereksiz yere yükseltilmesini önlemek için kullanıcı aracısı dizelerini incelemelidir."
+            }
+        }
+    },
+    "SCN_025": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Attackers often probe API endpoints to discover available functionality and authorization boundaries. Repeated unauthorized requests across versioned paths strongly indicate reconnaissance.",
+                "tr": "Saldırganlar genellikle mevcut işlevselliği ve yetkilendirme sınırlarını keşfetmek için API uç noktalarını yoklarlar. Versiyonlu yollarda tekrarlanan yetkisiz istekler, keşif aktivitesini güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Misconfigured client applications can generate similar patterns. Analysts should review application logs and client identifiers before escalation.",
+                "tr": "Yanlış yapılandırılmış istemci uygulamaları benzer desenler üretebilir. Analistler, yükseltmeden önce uygulama loglarını ve istemci tanımlayıcılarını incelemelidir."
+            }
+        }
+    },
+    "SCN_026": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "After initial compromise, attackers commonly use SMB to move laterally across the network. Authentication attempts from a workstation to multiple servers strongly indicate malicious propagation.",
+                "tr": "İlk tehlikeden sonra, saldırganlar ağ üzerinde yatay olarak hareket etmek için yaygın olarak SMB kullanır. Bir iş istasyonundan birden fazla sunucuya yapılan kimlik doğrulama denemeleri, kötü amaçlı yayılmayı güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some management tools may use SMB for administrative tasks. Analysts should validate whether the source system is authorized for such operations.",
+                "tr": "Bazı yönetim araçları idari görevler için SMB kullanabilir. Analistler, kaynak sistemin bu tür işlemler için yetkili olup olmadığını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_027": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although the activity resembles lateral movement, it was performed by an administrator during an active incident response window, which is expected behavior.",
+                "tr": "Aktivite yatay hareketi andırsa da, aktif bir olay müdahalesi penceresi sırasında bir yönetici tarafından gerçekleştirilmiştir, bu beklenen bir davranıştır."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should correlate administrative access patterns with incident response timelines and privileged roles before escalating.",
+                "tr": "SOC analistleri idari erişim desenlerini olay müdahale zaman çizelgeleri ve ayrıcalıklı rollerle ilişkilendirmeden önce yükseltmelidir."
+            }
+        }
+    },
+    "SCN_028": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Attackers frequently use PsExec to remotely execute commands across systems after gaining initial access. The combination of phishing, PsExec execution, and rapid lateral spread strongly indicates malicious activity. (Severity Critical: Lateral Movement)",
+                "tr": "Saldırganlar, ilk erişimi sağladıktan sonra sistemler arasında komutları uzaktan yürütmek için sık sık PsExec kullanır. Oltalama, PsExec yürütme ve hızlı yatay yayılma kombinasyonu, kötü amaçlı aktiviteyi güçlü bir şekilde gösterir. (Önem Derecesi Kritik: Yatay Hareket)"
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Administrators may use PsExec for maintenance. Analysts should confirm whether the execution aligns with approved change windows and authorized admin activity.",
+                "tr": "Yöneticiler bakım için PsExec kullanabilir. Analistler, yürütmenin onaylanmış değişiklik pencereleri ve yetkili yönetici aktivitesiyle uyumlu olup olmadığını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_029": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although the behavior resembles lateral movement, the source system is a backup agent performing scheduled tasks, which is expected and legitimate activity.",
+                "tr": "Davranış yatay hareketi andırsa da, kaynak sistem planlanmış görevleri yerine getiren bir yedekleme ajanıdır, bu beklenen ve meşru bir aktivitedir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "SOC analysts should maintain an inventory of backup and management systems to avoid misclassifying their activity as malicious lateral movement.",
+                "tr": "SOC analistleri, aktivitelerini kötü amaçlı yatay hareket olarak yanlış sınıflandırmamak için yedekleme ve yönetim sistemlerinin bir envanterini tutmalıdır."
+            }
+        }
+    },
+    "SCN_030": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Kerberoasting attacks abuse legitimate Kerberos functionality to obtain encrypted service tickets for offline password cracking. Multiple service ticket requests from a single host strongly indicate malicious intent.",
+                "tr": "Kerberoasting saldırıları, çevrimdışı parola kırma için şifreli servis biletleri elde etmek amacıyla meşru Kerberos işlevselliğini kötüye kullanır. Tek bir ana bilgisayardan birden fazla servis bileti isteği, kötü niyetli amacı güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some applications may request service tickets for multiple accounts. Analysts should verify whether the requesting host normally performs such operations.",
+                "tr": "Bazı uygulamalar birden fazla hesap için servis bileti isteyebilir. Analistler, istekte bulunan ana bilgisayarın normalde bu tür işlemleri gerçekleştirip gerçekleştirmediğini doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_031": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Attackers often use encoded PowerShell commands to evade detection. The timing after an email attachment strongly suggests malicious execution.",
+                "tr": "Saldırganlar tespitten kaçınmak için genellikle kodlanmış PowerShell komutları kullanır. Bir e-posta eklentisinden sonraki zamanlama, kötü amaçlı yürütmeyi güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some IT scripts may use encoded commands, but user context and phishing correlation make this unlikely.",
+                "tr": "Bazı BT betikleri kodlanmış komutlar kullanabilir, ancak kullanıcı bağlamı ve oltalama ilişkisi bunu olası kılmaz."
+            }
+        }
+    },
+    "SCN_032": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although large data movement can indicate exfiltration, this activity aligns with a known DBA role and scheduled task.",
+                "tr": "Büyük veri hareketi veri hırsızlığını işaret edebilse de, bu aktivite bilinen bir DBA rolü ve planlanmış görevle uyumludur."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "Role-based access and task scheduling confirm legitimate database administration activity.",
+                "tr": "Rol tabanlı erişim ve görev zamanlaması, meşru veritabanı yönetim aktivitesini doğrular."
+            }
+        }
+    },
+    "SCN_033": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Impossible travel alerts often trigger when VPNs or proxy services are used. Without evidence of credential abuse or suspicious activity, this alone does not indicate an attack.",
+                "tr": "İmkansız seyahat uyarıları genellikle VPN veya vekil sunucu servisleri kullanıldığında tetiklenir. Kimlik bilgisi kötüye kullanımı veya şüpheli aktivite kanıtı olmadan, bu tek başına bir saldırıyı göstermez."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "The login behavior aligns with legitimate VPN usage. SOC analysts should confirm VPN configurations and user behavior before escalating impossible travel alerts.",
+                "tr": "Giriş davranışı meşru VPN kullanımıyla uyumludur. SOC analistleri, imkansız seyahat uyarılarını yükseltmeden önce VPN yapılandırmalarını ve kullanıcı davranışını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_034": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Scheduled tasks are commonly abused by attackers to maintain persistence. Creating a task that executes scripts from temporary directories strongly indicates malicious intent.",
+                "tr": "Zamanlanmış görevler, kalıcılığı sağlamak için saldırganlar tarafından yaygın olarak kötüye kullanılır. Geçici dizinlerden betik çalıştıran bir görev oluşturmak, kötü niyetli amacı güçlü bir şekilde gösterir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some advanced users or administrators may create scheduled tasks. Analysts should review the task purpose, execution path, and user role.",
+                "tr": "Bazı ileri düzey kullanıcılar veya yöneticiler zamanlanmış görevler oluşturabilir. Analistler görevin amacını, yürütme yolunu ve kullanıcı rolünü incelemelidir."
+            }
+        }
+    },
+    "SCN_035": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "High DNS request volumes can be generated by browser extensions, analytics tools, or telemetry services and do not automatically indicate data exfiltration.",
+                "tr": "Yüksek DNS istek hacimleri tarayıcı eklentileri, analiz araçları veya telemetri servisleri tarafından üretilebilir ve otomatik olarak veri hırsızlığını göstermez."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "The DNS traffic pattern aligns with known browser extension behavior. Analysts should validate installed extensions and destination domains.",
+                "tr": "DNS trafik deseni bilinen tarayıcı eklentisi davranışıyla uyumludur. Analistler yüklü eklentileri ve hedef alan adlarını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_036": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Outbound connections to previously unseen ASNs can indicate command-and-control communication, especially when originating from servers that rarely initiate external traffic.",
+                "tr": "Daha önce görülmemiş ASN'lere yapılan giden bağlantılar, özellikle nadiren harici trafik başlatan sunuculardan kaynaklandığında, komuta ve kontrol iletişimini işaret edebilir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Infrastructure or vendor changes may introduce new ASNs. Analysts should correlate with recent changes before escalation.",
+                "tr": "Altyapı veya tedarikçi değişiklikleri yeni ASN'ler getirebilir. Analistler, yükseltmeden önce son değişikliklerle ilişkilendirmelidir."
+            }
+        }
+    },
+    "SCN_037": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Although large outbound traffic can appear suspicious, software updates often generate significant network activity from new domains or CDNs.",
+                "tr": "Büyük giden trafik şüpheli görünse de, yazılım güncellemeleri genellikle yeni alan adlarından veya CDN'lerden önemli ağ aktivitesi üretir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "The traffic aligns with a verified vendor update process. SOC analysts should validate update schedules and vendor announcements.",
+                "tr": "Trafik doğrulanmış bir tedarikçi güncelleme süreciyle uyumludur. SOC analistleri güncelleme zamanlamalarını ve tedarikçi duyurularını doğrulamalıdır."
+            }
+        }
+    },
+    "SCN_038": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Multiple account lockouts originating from a single source strongly indicate credential abuse or brute force attempts and require immediate investigation.",
+                "tr": "Tek bir kaynaktan kaynaklanan birden fazla hesap kilitlemesi, kimlik bilgisi kötüye kullanımını veya kaba kuvvet girişimlerini güçlü bir şekilde gösterir ve acil soruşturma gerektirir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Widespread authentication issues or directory service outages can sometimes cause lockouts. Analysts should check system health indicators.",
+                "tr": "Yaygın kimlik doğrulama sorunları veya dizin servisi kesintileri bazen kilitlemelere neden olabilir. Analistler sistem sağlık göstergelerini kontrol etmelidir."
+            }
+        }
+    },
+    "SCN_039": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why this is a True Positive",
+                "tr": "Neden Bu Bir Gerçek Pozitiftir"
+            },
+            "message": {
+                "en": "Attackers often create inbox forwarding rules to silently exfiltrate data and maintain persistence. Such actions are rarely legitimate without user awareness.",
+                "tr": "Saldırganlar verileri sessizce dışarı sızdırmak ve kalıcılığı sağlamak için genellikle gelen kutusu yönlendirme kuralları oluşturur. Bu tür eylemler kullanıcı farkındalığı olmadan nadiren meşrudur."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "When This Could Be a False Positive",
+                "tr": "Bu Durum Ne Zaman Yanlış Pozitif Olabilir"
+            },
+            "message": {
+                "en": "Some users may configure forwarding rules intentionally. Analysts should confirm user intent and review audit logs.",
+                "tr": "Bazı kullanıcılar yönlendirme kurallarını kasıtlı olarak yapılandırabilir. Analistler kullanıcı niyetini doğrulamalı ve denetim loglarını incelemelidir."
+            }
+        }
+    },
+    "SCN_040": {
+        "TRUE_POSITIVE": {
+            "title": {
+                "en": "Why This Is NOT Necessarily a True Positive",
+                "tr": "Neden Bu Mutlaka Bir Gerçek Pozitif DEĞİLDİR"
+            },
+            "message": {
+                "en": "Repeated API authorization failures can occur due to misconfigured tokens or application bugs rather than malicious behavior.",
+                "tr": "Tekrarlanan API yetkilendirme hataları, kötü amaçlı davranıştan ziyade yanlış yapılandırılmış tokenler veya uygulama hatalarından kaynaklanabilir."
+            }
+        },
+        "FALSE_POSITIVE": {
+            "title": {
+                "en": "Why This Is a False Positive",
+                "tr": "Neden Bu Bir Yanlış Pozitiftir"
+            },
+            "message": {
+                "en": "The activity originates from an internal application and aligns with configuration errors. Analysts should notify development teams rather than escalate as an incident.",
+                "tr": "Aktivite dahili bir uygulamadan kaynaklanır ve yapılandırma hatalarıyla uyumludur. Analistler, olay olarak yükseltmek yerine geliştirme ekiplerini bilgilendirmelidir."
+            }
+        }
+    }
+}

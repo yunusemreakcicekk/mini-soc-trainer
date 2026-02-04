@@ -1,0 +1,788 @@
+{
+    "SCN_001": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "A small number of failed login attempts may occur due to user mistakes.",
+            "tr": "Az sayıda başarısız giriş denemesi, kullanıcı hatalarından kaynaklanabilir."
+        }
+    },
+    "SCN_002": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "A high number of failed login attempts in a short time window strongly indicates a brute force attack.",
+            "tr": "Kısa bir zaman dilimi içinde çok sayıda başarısız giriş denemesi, kaba kuvvet saldırısını güçlü bir şekilde gösterir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "What is the recommended next step?",
+                "tr": "Önerilen sonraki adım nedir?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Block IP & Reset Password",
+                        "tr": "IP'yi Engelle & Parolayı Sıfırla"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Ignore",
+                        "tr": "Yoksay"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_003": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "The failed login attempts are spread over a long time window (12 mins) with a very low frequency per user. This pattern is too slow to constitute an effective brute force attack and is more likely a misconfigured script.",
+            "tr": "Başarısız giriş denemeleri uzun bir zaman dilimine (12 dakika) yayılmıştır ve kullanıcı başına frekans çok düşüktür. Bu desen, etkili bir kaba kuvvet saldırısı oluşturmak için çok yavaştır ve daha çok yanlış yapılandırılmış bir betiği andırır."
+        }
+    },
+    "SCN_004": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Password spraying attacks intentionally use a low number of attempts per user to evade account lockout mechanisms.",
+            "tr": "Parola püskürtme saldırıları, hesap kilitleme mekanizmalarından kaçınmak için kullanıcı başına kasıtlı olarak az sayıda deneme kullanır."
+        },
+        "follow_up": {
+            "question": {
+                "en": "How should you respond?",
+                "tr": "Nasıl yanıt vermelisiniz?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Enforce MFA & Reset Creds",
+                        "tr": "MFA Zorunlu Kıl & Kimlik Bilgilerini Sıfırla"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Whitelist IP",
+                        "tr": "IP'ye İzin Ver"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_005": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Rapid connection attempts to many different ports from a single external source indicate network reconnaissance activity.",
+            "tr": "Tek bir harici kaynaktan birçok farklı porta hızlı bağlantı denemeleri, ağ keşfi aktivitesini gösterir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Action required?",
+                "tr": "Gerekli işlem?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Block IP at Firewall",
+                        "tr": "Güvenlik Duvarında IP'yi Engelle"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Log only",
+                        "tr": "Sadece Logla"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_006": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "A successful login following multiple failed attempts strongly indicates that valid credentials were compromised.",
+            "tr": "Birden fazla başarısız denemenin ardından başarılı bir giriş, geçerli kimlik bilgilerinin ele geçirildiğini güçlü bir şekilde gösterir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Immediate Action?",
+                "tr": "Acil Eylem?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Disable Account & Initiate Forensic Review",
+                        "tr": "Hesabı Devre Dışı Bırak & Adli İnceleme Başlat"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Send Email Warning",
+                        "tr": "E-posta Uyarısı Gönder"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_007": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "DNS tunneling is characterized by high-volume queries with encoded or random subdomains used to exfiltrate data.",
+            "tr": "DNS tünelleme, veri çıkarmak için kullanılan kodlanmış veya rastgele alt etki alanlarına sahip yüksek hacimli sorgularla karakterize edilir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Next step?",
+                "tr": "Sonraki adım?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Sinkhole Domain & Isolate",
+                        "tr": "Etki Alanını Sinkhole Yap & İzole Et"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Monitor",
+                        "tr": "İzle"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_008": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Regular outbound connections at fixed intervals are a strong indicator of command and control communication.",
+            "tr": "Sabit aralıklarla düzenli giden bağlantılar, komuta ve kontrol iletişiminin güçlü bir göstergesidir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Response?",
+                "tr": "Yanıt?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Isolate Host & Block IP",
+                        "tr": "Ana Bilgisayarı İzole Et & IP'yi Engelle"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Ignore",
+                        "tr": "Yoksay"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_009": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Unusual data transfer behavior from an internal user to external cloud services outside business hours indicates potential insider threat.",
+            "tr": "Mesai saatleri dışında dahili bir kullanıcıdan harici bulut hizmetlerine olağandışı veri aktarımı davranışı, potansiyel içeriden tehdidi gösterir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Investigation step?",
+                "tr": "Soruşturma adımı?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Interview User & Revoke Access",
+                        "tr": "Kullanıcıyla Görüş & Erişimi İptal Et"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Archive Logs",
+                        "tr": "Logları Arşivle"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_010": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Simultaneous connection attempts from multiple hosts to uncommon ports indicate automated lateral propagation.",
+            "tr": "Birden fazla ana bilgisayardan nadir portlara eşzamanlı bağlantı denemeleri, otomatik yanal yayılmayı gösterir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Containment Strategy?",
+                "tr": "Çevreleme Stratejisi?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Isolate VLAN & Patch",
+                        "tr": "VLAN'ı İzole Et & Yama Yap"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Reboot Switches",
+                        "tr": "Anahtarları Yeniden Başlat"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_011": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "MFA fatigue attacks rely on overwhelming users with push requests until one is accepted, resulting in unauthorized access.",
+            "tr": "MFA yorgunluk saldırıları, biri kabul edilene kadar kullanıcıları anlık bildirim istekleriyle bunaltmaya dayanır ve yetkisiz erişime neden olur."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Immediate Remediation?",
+                "tr": "Acil Düzeltme?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Revoke Sessions & Require OTP",
+                        "tr": "Oturumları İptal Et & OTP İste"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Educate User",
+                        "tr": "Kullanıcıyı Eğit"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_012": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Authorized vulnerability scans often generate high volumes of port scan traffic during maintenance windows and should not be treated as malicious activity.",
+            "tr": "Yetkili güvenlik açığı taramaları, bakım aralıkları sırasında genellikle yüksek hacimli port tarama trafiği oluşturur ve kötü amaçlı aktivite olarak değerlendirilmemelidir."
+        }
+    },
+    "SCN_013": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Cloud synchronization after system reimage can generate high data transfer volumes and should not be classified as data exfiltration.",
+            "tr": "Sistem yeniden görüntülemesinden sonra bulut senkronizasyonu, yüksek veri aktarımı hacimleri oluşturabilir ve veri çıkarma olarak sınıflandırılmamalıdır."
+        }
+    },
+    "SCN_014": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Authorized administrators often access multiple systems during maintenance or patching activities, which can resemble lateral movement.",
+            "tr": "Yetkili yöneticiler, bakım veya yama aktiviteleri sırasında genellikle birden fazla sisteme erişir, bu da yanal harekete benzeyebilir."
+        }
+    },
+    "SCN_015": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "The use of legitimate system binaries to download and execute external payloads is a common technique used in fileless attacks.",
+            "tr": "Harici yükleri indirmek ve yürütmek için meşru sistem ikililerinin kullanılması, dosyasız saldırılarda kullanılan yaygın bir tekniktir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Response Action?",
+                "tr": "Yanıt İşlemi?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Isolate Endpoint & Preserve Evidence",
+                        "tr": "Uç Noktayı İzole Et & Kanıtları Koru"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Watch",
+                        "tr": "İzle"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_016": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Authentication attempts originating from anonymization networks such as TOR are rarely legitimate and present a high security risk.",
+            "tr": "TOR gibi anonimleştirme ağlarından kaynaklanan kimlik doğrulama denemeleri nadiren meşrudur ve yüksek güvenlik riski oluşturur."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Policy Enforcement?",
+                "tr": "Politika Uygulama?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Block TOR Nodes",
+                        "tr": "TOR Düğümlerini Engelle"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Allow",
+                        "tr": "İzin Ver"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_017": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Legitimate VPN logins from new locations can occur due to employee travel or use of approved VPN services.",
+            "tr": "Çalışan seyahati veya onaylı VPN hizmetlerinin kullanımı nedeniyle yeni konumlardan meşru VPN girişleri gerçekleşebilir."
+        }
+    },
+    "SCN_018": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Service accounts often generate multiple authentication failures when passwords expire, which is a configuration issue rather than malicious activity.",
+            "tr": "Servis hesapları, parolalar sona erdiğinde genellikle birden fazla kimlik doğrulama hatası oluşturur, bu da kötü amaçlı aktiviteden ziyade bir yapılandırma sorunudur."
+        }
+    },
+    "SCN_019": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Password spraying in cloud environments often appears as isolated authentication failures across many users. This pattern is a well-known technique used to bypass account lockout protections.",
+            "tr": "Bulut ortamlarında parola püskürtme, genellikle birçok kullanıcıda izole edilmiş kimlik doğrulama hataları olarak görünür. Bu desen, hesap kilitleme korumalarını atlatmak için kullanılan iyi bilinen bir tekniktir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Mitigation?",
+                "tr": "Azaltma?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Enable Conditional Access",
+                        "tr": "Koşullu Erişimi Etkinleştir"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "None",
+                        "tr": "Hiçbiri"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_020": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "A user generated several failed login attempts immediately after resetting their password, followed by a successful authentication from the same legitimate user context.",
+            "tr": "Bir kullanıcı, parolasını sıfırladıktan hemen sonra birkaç başarısız giriş denemesi oluşturdu ve ardından aynı meşru kullanıcı bağlamından başarılı bir kimlik doğrulama gerçekleştirdi."
+        }
+    },
+    "SCN_021": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Slow port scans are used to evade detection thresholds and indicate reconnaissance activity over time.",
+            "tr": "Yavaş port taramaları, tespit eşiklerinden kaçınmak için kullanılır ve zaman içinde keşif aktivitesini gösterir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Action?",
+                "tr": "Eylem?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Block Source IP",
+                        "tr": "Kaynak IP'yi Engelle"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Ignore",
+                        "tr": "Yoksay"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_022": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Internal monitoring and health-check tools routinely scan services to verify uptime and performance.",
+            "tr": "Dahili izleme ve sağlık kontrolü araçları, çalışma süresini ve performansı doğrulamak için servisleri rutin olarak tarar."
+        }
+    },
+    "SCN_023": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Automated directory enumeration tools generate large numbers of requests for common paths to identify hidden or misconfigured resources.",
+            "tr": "Otomatik dizin numaralandırma araçları, gizli veya yanlış yapılandırılmış kaynakları belirlemek için yaygın yollara çok sayıda istek oluşturur."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Next step?",
+                "tr": "Sonraki adım?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Block IP & Check WAF",
+                        "tr": "IP'yi Engelle & WAF'ı Kontrol Et"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Ignore",
+                        "tr": "Yoksay"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_024": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Content Delivery Networks regularly perform health checks against backend services to ensure availability and performance.",
+            "tr": "İçerik Dağıtım Ağları, kullanılabilirliği ve performansı sağlamak için arka uç servislerine karşı düzenli olarak sağlık kontrolleri gerçekleştirir."
+        }
+    },
+    "SCN_025": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Enumerating API endpoints and versions through repeated unauthorized requests is a common reconnaissance technique used to map application attack surfaces.",
+            "tr": "Tekrarlanan yetkisiz istekler yoluyla API uç noktalarını ve sürümlerini numaralandırmak, uygulama saldırı yüzeylerini haritalamak için kullanılan yaygın bir keşif tekniğidir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Remediation?",
+                "tr": "İyileştirme?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Rate Limit & Block",
+                        "tr": "Hız Sınırı Koy & Engelle"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Do Nothing",
+                        "tr": "Hiçbir Şey Yapma"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_026": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Workstations rarely initiate SMB authentication attempts to multiple servers unless compromised or misused for lateral movement.",
+            "tr": "İş istasyonları, ele geçirilmedikçe veya yanal hareket için kötüye kullanılmadıkça, birden fazla sunucuya nadiren SMB kimlik doğrulama denemeleri başlatır."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Action?",
+                "tr": "Eylem?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Isolate Workstation",
+                        "tr": "İş İstasyonunu İzole Et"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Monitor",
+                        "tr": "İzle"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_027": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "During incident response or maintenance, administrators commonly access multiple systems to investigate or remediate issues.",
+            "tr": "Olay müdahalesi veya bakım sırasında, yöneticiler sorunları araştırmak veya gidermek için genellikle birden fazla sisteme erişir."
+        }
+    },
+    "SCN_028": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "PsExec is commonly abused by attackers for lateral movement after initial compromise, especially following phishing attacks.",
+            "tr": "PsExec, özellikle kimlik avı saldırılarının ardından ilk ele geçirmeden sonra yanal hareket için saldırganlar tarafından yaygın olarak kötüye kullanılır."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Response?",
+                "tr": "Yanıt?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Isolate Host & Escalate for Forensics",
+                        "tr": "Ana Bilgisayarı İzole Et & Adli Bilişim İçin Yükselt"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Reboot",
+                        "tr": "Yeniden Başlat"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_029": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Backup and management agents routinely connect to multiple systems using authenticated sessions to perform scheduled operations.",
+            "tr": "Yedekleme ve yönetim aracıları, planlı işlemleri gerçekleştirmek için kimliği doğrulanmış oturumlar kullanarak birden fazla sisteme rutin olarak bağlanır."
+        }
+    },
+    "SCN_030": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Requesting Kerberos service tickets for multiple service accounts in a short period is a strong indicator of Kerberoasting activity.",
+            "tr": "Kısa bir süre içinde birden fazla servis hesabı için Kerberos servis biletleri talep etmek, Kerberoasting aktivitesinin güçlü bir göstergesidir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Next?",
+                "tr": "Sıradaki?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Reset Service Acct Passwords",
+                        "tr": "Servis Hesabı Parolalarını Sıfırla"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Ignore",
+                        "tr": "Yoksay"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_031": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Encoded PowerShell execution following email interaction is a common malware execution technique.",
+            "tr": "E-posta etkileşimini takiben kodlanmış PowerShell yürütülmesi, yaygın bir kötü amaçlı yazılım yürütme tekniğidir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Action?",
+                "tr": "Eylem?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Isolate & Analyze Script",
+                        "tr": "İzole Et & Betiği Analiz Et"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Ignore",
+                        "tr": "Yoksay"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_032": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "DBAs frequently perform large exports as part of reporting or maintenance tasks.",
+            "tr": "DBA'lar, raporlama veya bakım görevlerinin bir parçası olarak sık sık büyük dışa aktarımlar gerçekleştirir."
+        }
+    },
+    "SCN_033": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "VPN usage can cause location anomalies that trigger impossible travel alerts.",
+            "tr": "VPN kullanımı, imkansız seyahat uyarılarını tetikleyen konum anormalliklerine neden olabilir."
+        }
+    },
+    "SCN_034": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Attackers commonly use scheduled tasks for persistence, especially when scripts run from temporary paths.",
+            "tr": "Saldırganlar, özellikle betikler geçici yollardan çalıştığında, kalıcılık için genellikle zamanlanmış görevleri kullanır."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Cleanup?",
+                "tr": "Temizlik?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Delete Task & Remove Malware",
+                        "tr": "Görevi Sil & Kötü Amaçlı Yazılımı Kaldır"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Disable Task",
+                        "tr": "Görevi Devre Dışı Bırak"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_035": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Browser extensions and telemetry services can generate high DNS traffic patterns.",
+            "tr": "Tarayıcı uzantıları ve telemetri hizmetleri, yüksek DNS trafik desenleri oluşturabilir."
+        }
+    },
+    "SCN_036": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "New outbound connections to unknown ASNs can indicate command-and-control infrastructure.",
+            "tr": "Bilinmeyen ASN'lere yapılan yeni giden bağlantılar, komuta ve kontrol altyapısını gösterebilir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Verification?",
+                "tr": "Doğrulama?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Check Threat Intel",
+                        "tr": "Tehdit İstihbaratını Kontrol Et"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Ping IP",
+                        "tr": "IP'ye Ping At"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_037": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Vendor infrastructure changes can introduce new domains and IP ranges.",
+            "tr": "Satıcı altyapısı değişiklikleri, yeni etki alanları ve IP aralıkları getirebilir."
+        }
+    },
+    "SCN_038": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Mass account lockouts from a single source strongly indicate credential abuse.",
+            "tr": "Tek bir kaynaktan toplu hesap kilitlemeleri, kimlik bilgisi kötüye kullanımını güçlü bir şekilde gösterir."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Action?",
+                "tr": "Eylem?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Block IP & Unlock Accounts",
+                        "tr": "IP'yi Engelle & Hesapların Kilidini Aç"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Unlock Only",
+                        "tr": "Sadece Kilidi Aç"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_039": {
+        "classification": "TRUE_POSITIVE",
+        "reason": {
+            "en": "Attackers commonly use email forwarding rules to maintain access and exfiltrate data.",
+            "tr": "Saldırganlar, erişimi sürdürmek ve veri çıkarmak için genellikle e-posta iletme kurallarını kullanır."
+        },
+        "follow_up": {
+            "question": {
+                "en": "Remediation?",
+                "tr": "İyileştirme?"
+            },
+            "options": [
+                {
+                    "label": {
+                        "en": "Remove Rule & Reset Pwd",
+                        "tr": "Kuralı Kaldır & Parolayı Sıfırla"
+                    },
+                    "correct": true
+                },
+                {
+                    "label": {
+                        "en": "Alert User",
+                        "tr": "Kullanıcıyı Uyar"
+                    },
+                    "correct": false
+                }
+            ]
+        }
+    },
+    "SCN_040": {
+        "classification": "FALSE_POSITIVE",
+        "reason": {
+            "en": "Application misconfigurations can cause repeated authorization failures without malicious intent.",
+            "tr": "Uygulama yanlış yapılandırmaları, kötü niyet olmaksızın tekrarlanan yetkilendirme hatalarına neden olabilir."
+        }
+    }
+}

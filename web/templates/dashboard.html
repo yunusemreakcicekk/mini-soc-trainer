@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ get_text('title_dashboard', session['lang']) }}</h2>
+
+<style>
+    .progress {
+        background: #1e293b;
+        height: 8px;
+        border-radius: 4px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        background: #22c55e;
+        height: 100%;
+        transition: width 0.3s ease;
+    }
+
+    .stat-box {
+        background: #1f2937;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #374151;
+        margin-bottom: 30px;
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .stat-item {
+        background: #111827;
+        padding: 15px;
+        border-radius: 6px;
+        text-align: center;
+        border: 1px solid #374151;
+    }
+
+    .badge-correct {
+        color: #22c55e;
+        font-weight: 600;
+    }
+
+    .badge-incorrect {
+        color: #ef4444;
+        font-weight: 600;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 2px solid #374151;
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #374151;
+        color: #e5e7eb;
+    }
+</style>
+
+<div class="stat-box">
+    <h3>{{ get_text('dash_stats_title', session['lang']) }}</h3>
+
+    <div style="margin-bottom: 25px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div
+                style="font-size: 2rem; font-weight: bold; color: {{ '#22c55e' if accuracy >= 75 else '#eab308' if accuracy >= 50 else '#ef4444' }};">
+                {{ "%.0f"|format(accuracy) }}%
+            </div>
+            <div style="color: #9ca3af; padding-bottom: 5px;">{{ get_text('dash_accuracy', session['lang']) }}</div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-fill"
+                style="width: {{ accuracy }}%; background-color: {{ '#22c55e' if accuracy >= 75 else '#eab308' if accuracy >= 50 else '#ef4444' }};">
+            </div>
+        </div>
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat-item">
+            <div style="font-size: 1.5rem; font-weight: bold;">{{ history|length }}</div>
+            <div style="font-size: 0.8rem; color: #9ca3af;">{{ get_text('dash_total_scenarios', session['lang']) }}
+            </div>
+        </div>
+        <div class="stat-item">
+            <div style="font-size: 1.5rem; font-weight: bold;">
+                <span style="color:#22c55e">{{ correct_count }}</span> | <span style="color:#ef4444">{{ incorrect_count
+                    }}</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #9ca3af;">{{ get_text('dash_correct_incorrect', session['lang']) }}
+            </div>
+        </div>
+        <div class="stat-item">
+            <div style="font-size: 1.5rem; font-weight: bold; color: #3b82f6;">{{ streak }} 🔥</div>
+            <div style="font-size: 0.8rem; color: #9ca3af;">{{ get_text('dash_streak', session['lang']) }}</div>
+        </div>
+    </div>
+</div>
+
+<h3>{{ get_text('dash_recent_activity', session['lang']) }}</h3>
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>{{ get_text('dash_col_scenario', session['lang']) }}</th>
+            <th>{{ get_text('dash_col_difficulty', session['lang']) }}</th>
+            <th>{{ get_text('dash_col_result', session['lang']) }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if recent|length == 0 %}
+        <tr>
+            <td colspan="3" style="text-align:center; color:#6b7280; padding:20px;">{{ get_text('dash_no_activity',
+                session['lang']) }}</td>
+        </tr>
+        {% endif %}
+
+        {% for h in recent|reverse %}
+        <tr>
+            <td>
+                {% if scenarios is defined and h.id in scenarios %}
+                {{ get_text(scenarios[h.id].attack_type, session['lang']) }}
+                {% else %}
+                {{ h.desc }}
+                {% endif %}
+            </td>
+            <td><span style="background:#374151; padding:2px 6px; border-radius:4px; font-size:0.8rem;">
+                    {{ get_text('lbl_' + h.difficulty|lower, session['lang']) }}
+                </span></td>
+            <td>
+                {% if h.result == 'correct' %}
+                <span class="badge-correct">✔ {{ get_text('badge_correct', session['lang']) }}</span>
+                {% else %}
+                <span class="badge-incorrect">✖ {{ get_text('badge_incorrect', session['lang']) }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<a href="{{ url_for('training') }}" class="btn">{{ get_text('dash_back_training', session['lang']) }}</a>
+{% endblock %}

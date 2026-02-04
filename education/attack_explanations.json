@@ -1,0 +1,9 @@
+{
+    "SSH_BRUTE_FORCE": {
+        "name": "SSH Brute Force Attack",
+        "mitre": "T1110",
+        "description": "A brute force attack attempts to gain unauthorized access by repeatedly trying different passwords.",
+        "why_detected": "Multiple failed SSH login attempts were detected from the same IP address within a short time period.",
+        "learning_note": "SOC teams commonly detect brute force attacks using threshold-based rules."
+    }
+}

@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs & debug
+*.log
+debug_output.txt
+upgrade.log
+debug.log
+
+# Uploads (runtime)
+uploads/
+uploads_web/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+venv/
+.env/

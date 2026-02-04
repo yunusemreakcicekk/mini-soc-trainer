@@ -1,0 +1,75 @@
+/* ===== SOC DARK THEME ===== */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #0f172a;
+    /* koyu lacivert-siyah */
+    color: #e5e7eb;
+    margin: 0;
+}
+
+/* NAVBAR */
+nav {
+    background-color: #020617;
+    padding: 14px 20px;
+    border-bottom: 2px solid #22c55e;
+}
+
+nav a {
+    color: #22c55e;
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #4ade80;
+}
+
+/* PAGE CONTAINER */
+.container {
+    padding: 30px;
+}
+
+/* HEADINGS */
+h1,
+h2 {
+    color: #22c55e;
+}
+
+/* CARD STYLE (ileride senaryolar için) */
+.card {
+    background-color: #020617;
+    border: 1px solid #22c55e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.btn {
+    background-color: #16a34a;
+    color: #020617;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #22c55e;
+}
+
+/* ALERT SEVERITY COLORS (ileride kullanacağız) */
+.severity-low {
+    color: #facc15;
+}
+
+.severity-medium {
+    color: #fb923c;
+}
+
+.severity-high {
+    color: #ef4444;
+}

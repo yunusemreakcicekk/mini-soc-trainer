@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mini SOC Trainer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Custom fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #111827;
+            color: #e5e7eb;
+        }
+
+        /* Reset default link styles in nav since we use inline styles there for now */
+        nav a:hover {
+            color: #fff !important;
+        }
+
+        .nav-bar {
+            display: flex;
+            gap: 1rem;
+            background: #eee;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .nav-right {
+            margin-left: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav
+        style="display: flex; align-items: center; justify-content: space-between; padding: 15px 30px; background-color: #020617; border-bottom: 1px solid #1f2937;">
+        <!-- Left Side: Basic Links -->
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="{{ url_for('index') }}"
+                style="font-size: 1.2rem; font-weight: bold; color: #34d399; text-decoration: none; margin-right: 15px;">🛡️
+                {{ get_text('nav_title', session['lang']) }}</a>
+            <a href="{{ url_for('index') }}"
+                style="text-decoration: none; color: #e5e7eb; padding: 5px 10px; border: 1px solid #374151; border-radius: 5px; font-size: 0.9rem; background-color: #1f2937;">
+                🏠 {{ get_text('nav_home', session['lang']) }}
+            </a>
+        </div>
+
+        <!-- Right Side: Settings & Language -->
+        <div style="display: flex; align-items: center; gap: 15px; color: #9ca3af; font-size: 0.9rem;">
+            <span>{{ get_text('nav_level', session['lang']) }}: <strong style="color: #fff;">{{
+                    get_text('lbl_' + session.get('difficulty', 'Medium')|lower, session['lang']) }}</strong></span>
+            <span style="opacity: 0.5;">|</span>
+            <div class="lang-switch">
+                <a href="{{ url_for('set_language', lang='tr') }}"
+                    style="text-decoration: none; padding: 5px 10px; border-radius: 4px; background: {{ '#374151' if session.get('lang') == 'tr' else 'transparent' }}; color: {{ '#fff' if session.get('lang') == 'tr' else '#9ca3af' }};">TR</a>
+                <a href="{{ url_for('set_language', lang='en') }}"
+                    style="text-decoration: none; padding: 5px 10px; border-radius: 4px; background: {{ '#374151' if session.get('lang') == 'en' else 'transparent' }}; color: {{ '#fff' if session.get('lang') == 'en' else '#9ca3af' }};">EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+
+</html>

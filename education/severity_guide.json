@@ -1,0 +1,14 @@
+{
+    "LOW": {
+        "meaning": "Suspicious activity with low confidence.",
+        "example": "2–3 failed login attempts in a short time."
+    },
+    "MEDIUM": {
+        "meaning": "Likely malicious activity that requires analyst attention.",
+        "example": "4–5 failed login attempts in a short time."
+    },
+    "HIGH": {
+        "meaning": "Confirmed malicious activity that requires immediate response.",
+        "example": "5 or more failed login attempts within one minute."
+    }
+}

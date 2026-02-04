@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HEADER / SCORE -->
+<div class="card">
+    <div style="display:flex; justify-content:space-between;">
+        <div>
+            <strong>Score:</strong>
+            ✅ {{ score.correct }} | ❌ {{ score.incorrect }}
+            &nbsp;
+            <a href="{{ url_for('reset_score') }}" class="btn"
+                style="background-color: #fca5a5; padding: 2px 8px; font-size: 0.8rem; border: none; cursor: pointer; text-decoration: none; color: white;">
+                {{ get_text('train_reset_score', session['lang']) }}</a>
+        </div>
+        <div>
+            <!-- Settings Links -->
+            {{ get_text('lbl_difficulty', session['lang']) }}:
+            <a href="{{ url_for('set_difficulty', diff='Easy') }}">{{ get_text('lbl_easy', session['lang']) }}</a> |
+            <a href="{{ url_for('set_difficulty', diff='Medium') }}">{{ get_text('lbl_medium', session['lang']) }}</a> |
+            <a href="{{ url_for('set_difficulty', diff='Hard') }}">{{ get_text('lbl_hard', session['lang']) }}</a>
+        </div>
+    </div>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>
+        {{ get_text('title_training_lab', session['lang']) }}
+        <small>({{ get_text('lbl_' + session.get('difficulty', 'Medium')|lower, session['lang']) }})</small>
+        <span style="font-size: 1rem; color: #9ca3af; margin-left: 10px;">
+            | {{ get_text('lbl_scenario_idx', session['lang']) }}: {{ current_index }} / {{ total_scenarios }}
+        </span>
+    </h2>
+    <a href="{{ url_for('dashboard') }}" class="btn"
+        style="background-color: #3b82f6; text-decoration: none; padding: 10px 15px; border-radius: 5px; color: white;">📊
+        {{ get_text('title_dashboard', session['lang']) }}</a>
+</div>
+
+<style>
+    .context-box {
+        background: linear-gradient(90deg,
+                rgba(250, 204, 21, 0.15),
+                rgba(15, 23, 42, 0.6));
+        color: #f8fafc;
+        border-left: 3px solid #facc15;
+        padding: 12px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+
+    .incident-title {
+        font-size: 22px;
+        font-weight: 600;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .incident-description {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #d1d5db;
+        /* slightly lighter than pure white for description */
+        margin-bottom: 15px;
+    }
+
+    .severity-line {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    .nav-btn {
+        background-color: #374151;
+        /* Default dark gray */
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .nav-btn:hover {
+        background-color: #4b5563;
+    }
+
+    .nav-btn.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .nav-btn.primary {
+        background-color: #3b82f6;
+    }
+
+    .nav-btn.primary:hover {
+        background-color: #2563eb;
+    }
+</style>
+
+<div class="card">
+    <div style="border-bottom: 2px solid #374151; padding-bottom: 15px; margin-bottom: 15px;">
+        <h3 class="incident-title" style="color: #60a5fa; margin-top: 0;">
+            {{ get_text(scenario.attack_type, session['lang']) }}
+        </h3>
+        <p class="incident-description" style="color: #e5e7eb; font-size: 1.1rem;">
+            {{ get_text(scenario.summary, session['lang']) }}
+        </p>
+    </div>
+
+    <div style="background: #1f2937; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div>
+                <strong style="color: #9ca3af;">{{ get_text('lbl_source_ip', session['lang']) }}:</strong>
+                <div style="color: #fff; font-family: monospace;">{{ scenario.source_ip }}</div>
+            </div>
+            <div>
+                <strong style="color: #9ca3af;">{{ get_text('lbl_time_window', session['lang']) }}:</strong>
+                <div style="color: #fff;">{{ get_text(scenario.time_window, session['lang']) }}</div>
+            </div>
+            <div>
+                <strong style="color: #9ca3af;">{{ get_text('lbl_baseline', session['lang']) }}:</strong>
+                <div style="color: #34d399;">{{ get_text(scenario.baseline, session['lang']) }}</div>
+            </div>
+            <div>
+                <strong style="color: #9ca3af;">{{ get_text('lbl_observed', session['lang']) }}:</strong>
+                <div style="color: #f87171;">{{ get_text(scenario.observed, session['lang']) }}</div>
+            </div>
+        </div>
+    </div>
+
+    <p class="severity-line">
+        <strong>{{ get_text('train_severity', session['lang']) }}:</strong> <span
+            class="severity-{{ scenario.severity|lower }}">{{ get_text('lbl_' + scenario.severity|lower,
+            session['lang']) }}</span> |
+        <strong>{{ get_text('train_confidence', session['lang']) }}:</strong> {{ scenario.confidence }}%
+    </p>
+
+    <!-- STEP 1: QUESTION (Show if strictly in 'question' step) -->
+    {% if step == 'question' %}
+    <form method="post">
+        <button class="btn" name="choice" value="TRUE_POSITIVE">{{ get_text('True Positive', session['lang'])
+            }}</button>
+        <button class="btn" name="choice" value="FALSE_POSITIVE">{{ get_text('False Positive', session['lang'])
+            }}</button>
+    </form>
+    {% endif %}
+
+</div>
+
+<!-- STEP 2: FOLLOW-UP (If TP) -->
+{% if step == 'follow_up' %}
+<div class="card" style="border-color: #3b82f6;">
+    <h3 style="color:#3b82f6;" class="section-title">✅ {{ get_text('train_correct_ir', session['lang']) }}</h3>
+    <p class="incident-description">{{ get_text(follow_up_data.question, session['lang']) }}</p>
+
+    <form method="post">
+        {% for opt in follow_up_data.options %}
+        <button class="btn" name="follow_up_choice" value="{{ get_text(opt.label, session['lang']) }}">
+            {{ get_text(opt.label, session['lang']) }}
+        </button>
+        {% endfor %}
+    </form>
+</div>
+{% endif %}
+
+<!-- STEP 3: FEEDBACK -->
+{% if step == 'feedback' %}
+<div class="card">
+    {% if result == "correct" %}
+    <h3 style="color:#22c55e;" class="section-title">✅ {{ get_text('train_correct', session['lang']) }}</h3>
+    {% else %}
+    <h3 style="color:#ef4444;" class="section-title">❌ {{ get_text('train_incorrect', session['lang']) }}</h3>
+    {% endif %}
+
+    <h4 class="section-title">{{ get_text(explanation.title, session['lang']) }}</h4>
+    <p class="incident-description">{{ get_text(explanation.message, session['lang']) }}</p>
+
+    {% if follow_up_msg %}
+    <div class="context-box">
+        <strong>IR Feedback:</strong> {{ follow_up_msg }}
+    </div>
+    {% endif %}
+
+    <br>
+    <!-- Navigation Buttons within Feedback -->
+    <!-- Actually, navigation should be always visible or just here? 
+         User asked for "previous scenario next scenario transition" at the bottom.
+         Typically, navigation is global. Let's put it outside the specific step blocks or at the very bottom.
+    -->
+</div>
+{% endif %}
+
+<!-- GLOBAL NAVIGATION (Always Visible at Bottom) -->
+<div style="margin-top: 30px; display: flex; justify-content: space-between;">
+    <!-- Previous Button -->
+    <a href="{{ url_for('training', action='prev') }}" class="nav-btn {{ 'disabled' if current_index <= 1 else '' }}">
+        ⬅ {{ get_text('btn_prev_scenario', session['lang']) }}
+    </a>
+
+    <!-- Next Button -->
+    <a href="{{ url_for('training', action='next') }}"
+        class="nav-btn primary {{ 'disabled' if current_index >= total_scenarios else '' }}">
+        {{ get_text('btn_next_scenario_nav', session['lang']) }} ➡
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{
+    "SSH_BRUTE_FORCE": {
+        "LOW": [
+            "Continue monitoring the source IP address",
+            "Review authentication logs"
+        ],
+        "MEDIUM": [
+            "Investigate the source IP address",
+            "Check for successful logins after failed attempts",
+            "Consider temporary IP blocking"
+        ],
+        "HIGH": [
+            "Block the source IP at the firewall immediately",
+            "Force password resets for affected accounts",
+            "Investigate for lateral movement",
+            "Escalate the incident if necessary"
+        ]
+    }
+}

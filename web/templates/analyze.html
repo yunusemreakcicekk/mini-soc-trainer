@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ get_text('title_log_analyzer', session['lang']) }} <small>({{ get_text('lbl_predefined_logs', session['lang'])
+        }})</small></h2>
+
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3>{{ get_text('analyze_step_1', session['lang']) }}</h3>
+        <!-- Separated Buttons: Refresh List and Analyze -->
+        <div>
+            <button class="btn" onclick="loadLogList()">{{ get_text('btn_refresh_list', session['lang']) }}</button>
+        </div>
+    </div>
+
+    <div id="log-list-container" style="display: none; border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;">
+        <p>Loading logs...</p>
+    </div>
+    <div id="error-message" style="color: red; display: none; margin-bottom: 10px;"></div>
+</div>
+
+<div class="card" id="viewer-card" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>2. {{ get_text('analyze_view_log', session['lang']) }}: <span id="current-log-name"></span></h3>
+        <!-- Analyze Button: Separated as requested -->
+        <button class="btn" id="analyze-btn" onclick="startAnalysis()"
+            style="background-color: #6b7280; cursor: not-allowed;" disabled>
+            {{ get_text('btn_analyze_log', session['lang']) }}
+        </button>
+    </div>
+
+    <p><small>Analiz etmeden önce logu inceleyiniz.</small></p>
+    <pre id="log-content"
+        style="background:#222; color:#0f0; padding:10px; height:400px; overflow-y:scroll; font-family:monospace; font-size:0.85rem; border: 1px solid #444;"></pre>
+</div>
+
+<div id="results-area" style="display: none; margin-top: 20px;">
+    <h3>{{ get_text('analyze_results_title', session['lang']) }}</h3>
+    <div id="alerts-container"></div>
+</div>
+
+<style>
+    /* Dark Theme Cyber Security Log Item Design */
+    .log-item-btn {
+        background-color: #1f2937;
+        /* Dark grayish blue */
+        color: #e5e7eb;
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        border: 1px solid #374151;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        font-family: 'Courier New', Courier, monospace;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Hover State */
+    .log-item-btn:hover {
+        background-color: #374151;
+        transform: scale(1.01);
+        border-color: #4b5563;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Pressed State */
+    .log-item-btn:active {
+        transform: scale(0.98);
+        background-color: #111827;
+    }
+
+    /* Normal Log - Soft Gray */
+    .log-item-btn.normal {
+        border-color: #4b5563;
+    }
+
+    /* Suspicious - Yellow Border */
+    .log-item-btn.suspicious {
+        border-color: #eab308;
+        border-width: 1px;
+    }
+
+    .log-item-btn.suspicious:hover {
+        box-shadow: 0 0 10px rgba(234, 179, 8, 0.2);
+    }
+
+    /* Critical - Red Glow */
+    .log-item-btn.critical {
+        border-color: #ef4444;
+        box-shadow: 0 0 5px rgba(239, 68, 68, 0.4);
+    }
+
+    .log-item-btn.critical:hover {
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+    }
+
+    /* Selected State */
+    .log-item-btn.selected {
+        background-color: #1e3a8a;
+        /* Deep blue highlight */
+        border-color: #60a5fa;
+        border-left: 4px solid #60a5fa;
+        padding-left: 12px;
+        color: #ffffff;
+        box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+    }
+
+    /* Maintain glow if selected AND critical */
+    .log-item-btn.selected.critical {
+        border-color: #ef4444;
+        border-left-color: #ef4444;
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+    }
+
+    /* Maintain border if selected AND suspicious */
+    .log-item-btn.selected.suspicious {
+        border-color: #eab308;
+        border-left-color: #eab308;
+    }
+
+    /* Icon styling */
+    .log-item-btn .icon {
+        margin-right: 10px;
+        opacity: 0.7;
+    }
+
+    .log-item-btn.selected .icon {
+        opacity: 1;
+        color: #60a5fa;
+    }
+</style>
+
+<script>
+    let currentLog = null;
+
+    // Inject UI Strings from Flask
+    const uiStrings = {{ ui | tojson }};
+    const currentLang = "{{ session.get('lang', 'en') }}";
+
+    function getJsText(key) {
+        if (typeof key === 'object' && key !== null) {
+            return key[currentLang] || key['en'] || JSON.stringify(key);
+        }
+        if (uiStrings[key]) {
+            return uiStrings[key][currentLang] || uiStrings[key]['en'] || key;
+        }
+        return key; // Fallback if regular string and not in dict
+    }
+
+    // Load logs immediately on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadLogList();
+    });
+
+    function loadLogList() {
+        const listDiv = document.getElementById('log-list-container');
+        const errorDiv = document.getElementById('error-message');
+
+        listDiv.style.display = 'block';
+        listDiv.innerHTML = '<p>Logs loaded...</p>';
+        errorDiv.style.display = 'none';
+
+        fetch('/logs')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(files => {
+                listDiv.innerHTML = '';
+
+                if (files.length === 0) {
+                    listDiv.innerHTML = '<p>⚠️ No logs found in <code>training_logs/</code>.</p>';
+                    return;
+                }
+
+                const ul = document.createElement('ul');
+                ul.style.listStyle = 'none';
+                ul.style.padding = '0';
+
+                files.forEach(file => {
+                    const li = document.createElement('li');
+                    li.style.marginBottom = '5px';
+
+                    // Define SVGs
+                    const svgRed = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-width:20px;"><path d="M12 2L2 22h20L12 2z" stroke="#ef4444" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="14" stroke="#ef4444" stroke-width="2"/><circle cx="12" cy="18" r="1.5" fill="#ef4444"/></svg>`;
+                    const svgYellow = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-width:20px;"><circle cx="12" cy="12" r="9" stroke="#facc15" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="13" stroke="#facc15" stroke-width="2"/><circle cx="12" cy="17" r="1.5" fill="#facc15"/></svg>`;
+                    const svgGreen = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-width:20px;"><circle cx="12" cy="12" r="9" stroke="#22c55e" stroke-width="2"/><path d="M8 12.5l3 3 5-6" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+                    // Determine severity for styling and icon
+                    let severityClass = 'normal';
+                    let iconHtml = svgGreen; // Default (Green for colorless/normal)
+
+                    const lowerFile = file.toLowerCase();
+
+                    // 🔴 CRITICAL / HIGH -> RED
+                    if (lowerFile.includes('impossible') ||
+                        lowerFile.includes('exfiltration') ||
+                        lowerFile.includes('tunneling') ||
+                        lowerFile.includes('linux_auth_bruteforce') || /* Explicitly Linux Brute Force only */
+                        lowerFile.includes('abuse') || /* PowerShell Abuse */
+                        lowerFile.includes('fatigue')) /* MFA Fatigue (High) -> Red */ {
+                        severityClass = 'critical';
+                        iconHtml = svgRed;
+                    }
+
+                    // 🟡 MEDIUM / SUSPICIOUS -> YELLOW
+                    else if (lowerFile.includes('web_directory') || /* Web Dir Brute Force -> Medium */
+                        lowerFile.includes('smb_lateral') ||  /* SMB Lateral -> Medium */
+                        lowerFile.includes('port_scan') ||
+                        lowerFile.includes('suspicious_user_agent') ||
+                        lowerFile.includes('healthcheck_flood') || /* CDN Flood (High) -> Red */
+                        lowerFile.includes('recon')) {
+                        severityClass = 'suspicious';
+                        iconHtml = svgYellow;
+                    }
+
+                    // 🟢 SAFE / INFO / NORMAL -> GREEN (Already Default, but explicit checks usually clearer)
+                    else {
+                        // mfa_legitimate, dns_large, user_typo, cdn_healthcheck (normal), etc.
+                        if (lowerFile.includes('legitimate') || lowerFile.includes('healthcheck')) {
+                            severityClass = 'safe';
+                        } else if (lowerFile.includes('dns_large')) {
+                            severityClass = 'info';
+                        }
+                        // Default remains svgGreen
+                    }
+
+                    li.innerHTML = `
+                        <button class="log-item-btn ${severityClass}" 
+                                onclick="selectLog(this, '${file}')">
+                            <span class="icon" style="display:flex; align-items:center;">${iconHtml}</span> ${file}
+                        </button>`;
+                    ul.appendChild(li);
+                });
+                listDiv.appendChild(ul);
+            })
+            .catch(err => {
+                console.error('Fetch error:', err);
+                errorDiv.innerText = 'Error loading logs: ' + err.message;
+                errorDiv.style.display = 'block';
+                listDiv.innerHTML = '<p style="color:red">Failed to load log list.</p>';
+            });
+    }
+
+    function selectLog(btnElement, filename) {
+        // Toggle selected state logic
+        document.querySelectorAll('.log-item-btn').forEach(btn => btn.classList.remove('selected'));
+        if (btnElement) {
+            btnElement.classList.add('selected');
+        }
+        currentLog = filename;
+        const viewerCard = document.getElementById('viewer-card');
+        const logContent = document.getElementById('log-content');
+        const analyzeBtn = document.getElementById('analyze-btn');
+        const logNameSpan = document.getElementById('current-log-name');
+
+        // Reset UI
+        document.getElementById('results-area').style.display = 'none';
+        logContent.innerText = 'Loading content...';
+        viewerCard.style.display = 'block';
+        logNameSpan.innerText = filename;
+
+        // Disable analyze button initially
+        analyzeBtn.style.backgroundColor = '#6b7280';
+        analyzeBtn.style.cursor = 'not-allowed';
+        analyzeBtn.disabled = true;
+
+        fetch('/view_log/' + filename)
+            .then(response => response.text())
+            .then(content => {
+                logContent.innerText = content;
+
+                // Enable Analyze Button
+                analyzeBtn.style.backgroundColor = '#ef4444'; // Red for action
+                analyzeBtn.style.cursor = 'pointer';
+                analyzeBtn.disabled = false;
+
+                viewerCard.scrollIntoView({ behavior: 'smooth' });
+            })
+            .catch(err => {
+                logContent.innerText = 'Error reading log: ' + err;
+            });
+    }
+
+    function startAnalysis() {
+        if (!currentLog) return;
+
+        const resultsArea = document.getElementById('results-area');
+        const container = document.getElementById('alerts-container');
+
+        resultsArea.style.display = 'block';
+        container.innerHTML = '<p>🔍 Analyzing log patterns...</p>';
+        resultsArea.scrollIntoView({ behavior: 'smooth' });
+
+        fetch('/analyze_log/' + currentLog)
+            .then(response => response.json())
+            .then(data => {
+                renderResults(data);
+            })
+            .catch(err => {
+                container.innerHTML = `< p style = "color:red" > Error: ${err}</p > `;
+            });
+    }
+
+    function renderResults(data) {
+        const container = document.getElementById('alerts-container'); // Changed from 'results-area' to 'alerts-container'
+        container.innerHTML = '';
+
+        if (data.status === 'clean') {
+            container.innerHTML = `
+                    <div style="text-align:center; padding: 40px; background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px;">
+                        <span style="font-size: 3rem;">✅</span>
+                        <h3 style="color: #34d399; margin-top: 10px;">${getJsText('analyze_clean')}</h3>
+                    </div>
+                `;
+            return;
+        }
+
+        if (data.status === 'benign') {
+            container.innerHTML = `
+                    <div style="text-align:center; padding: 40px; background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; border-radius: 8px;">
+                        <span style="font-size: 3rem;">🛡️</span>
+                        <h3 style="color: #60a5fa; margin-top: 10px;">${getJsText('analyze_benign')}</h3>
+                        <div style="text-align: left; margin-top: 20px; color: #d1d5db;">
+                            <strong style="color: #93c5fd;">${getJsText('analyze_why_benign')}</strong>
+                            <p>${getJsText(data.benign_reason)}</p>
+                        </div>
+                    </div>
+                `;
+            return;
+        }
+
+        if (!data.alerts || data.alerts.length === 0) {
+            container.innerHTML = `
+                    <div style="text-align:center; padding: 40px;">
+                        <h3 style="color: #9ca3af;">${getJsText('analyze_clean')}</h3>
+                    </div>
+                `;
+            return;
+        }
+
+        data.alerts.forEach(alert => {
+            const div = document.createElement('div');
+            // Check severity for styling logic
+            const severityColor = alert.severity === "CRITICAL" ? "#ef4444" :
+                alert.severity === "HIGH" ? "#f97316" :
+                    alert.severity === "MEDIUM" ? "#eab308" : "#3b82f6";
+
+            div.style.marginBottom = '20px';
+            div.style.border = '1px solid #374151';
+            div.style.borderRadius = '8px';
+            div.style.overflow = 'hidden';
+            div.style.backgroundColor = '#1f2937'; // Dark BG
+            div.style.color = '#e5e7eb'; // Light Text
+
+            let actionsHtml = '';
+            // Handle actions list - simple map with getJsText
+            if (alert.recommended_actions && Array.isArray(alert.recommended_actions)) {
+                actionsHtml = '<ul style="margin:0; padding-left:20px;">' +
+                    alert.recommended_actions.map(action => `<li style="margin-bottom:5px;">${getJsText(action)}</li>`).join('') +
+                    '</ul>';
+            }
+
+            // Translate Severity
+            const localizedSeverity = getJsText('lbl_' + alert.severity.toLowerCase()) || alert.severity;
+
+            const html = `
+                    <div style="padding: 15px; border-bottom: 1px solid #4b5563;">
+                        <h3 style="margin:0; color: ${severityColor}; display:flex; align-items:center; gap:10px;">
+                            🚨 ${alert.attack_type || 'Security Alert'}
+                        </h3>
+                        ${alert.mitre ? `<p style="margin:5px 0 0 0; font-size:0.9rem; color:#9ca3af;"><strong>MITRE:</strong> ${alert.mitre}</p>` : ''}
+                    </div>
+                    <div style="padding: 20px;">
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:20px; font-size:0.95rem;">
+                            <div><strong>${getJsText('train_severity')}:</strong> <span style="color:${severityColor}; font-weight:bold;">${localizedSeverity}</span></div>
+                            
+                            ${alert.fields ?
+                    Object.entries(alert.fields).map(([key, value]) => `<div><strong>${getJsText(key)}:</strong> ${value}</div>`).join('')
+                    :
+                    `
+                                <div><strong>${getJsText('lbl_source_ip')}:</strong> ${alert.source_ip || 'N/A'}</div>
+                                <div><strong>${getJsText('lbl_failed_login_attempts')}:</strong> ${alert.failed_attempts || 'N/A'}</div>
+                                `
+                }
+                            
+                            <div><strong>${getJsText('lbl_time_window')}:</strong> ${alert.time_window || 'N/A'}</div>
+                        </div>
+                        
+                        <hr style="border-color:#4b5563; margin-bottom:20px;">
+                        
+                        ${alert.explanation ? `
+                            <div style="margin-bottom:15px;">
+                                <h4 style="color:#60a5fa; margin-bottom:5px; margin-top:0;">${getJsText('analyze_why_detected')}</h4>
+                                <p style="margin-top:0; color:#d1d5db;">${getJsText(alert.explanation.why_detected)}</p>
+                            </div>
+                            <div style="margin-bottom:15px;">
+                                <h4 style="color:#60a5fa; margin-bottom:5px; margin-top:0;">${getJsText('analyze_severity_meaning')}</h4>
+                                <p style="margin-top:0; color:#d1d5db;">${getJsText(alert.explanation.severity_meaning)}</p>
+                            </div>
+                            <div style="margin-bottom:15px;">
+                                <h4 style="color:#60a5fa; margin-bottom:5px; margin-top:0;">${getJsText('analyze_learning_note')}</h4>
+                                <p style="margin-top:0; color:#9ca3af; font-style:italic;">${getJsText(alert.explanation.learning_note)}</p>
+                            </div>
+                        ` : ''}
+                        
+                        ${actionsHtml ? `
+                            <div style="background:#111827; padding:15px; border-radius:5px; border:1px solid #374151; margin-top:20px;">
+                                <h4 style="color:#34d399; margin-top:0; margin-bottom:10px;">✅ ${getJsText('analyze_rec_actions')}</h4>
+                                <div style="color:#d1d5db;">${actionsHtml}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+
+            div.innerHTML = html;
+            container.appendChild(div);
+        });
+    }
+</script>
+{% endblock %}
