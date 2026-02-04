@@ -6,6 +6,8 @@ from collections import defaultdict
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRAINING_LOGS_DIR = os.path.join(BASE_DIR, "training_logs")
+
 sys.path.append(BASE_DIR)
 
 from werkzeug.utils import secure_filename
@@ -360,6 +362,4 @@ def training():
 
 import os
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+
