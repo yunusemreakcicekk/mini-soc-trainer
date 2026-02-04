@@ -1,0 +1,3 @@
+2026-01-29 10:30:01 query A updates.microsoft.com from 192.168.1.55
+2026-01-29 10:30:02 query A telemetry.google.com from 192.168.1.55
+2026-01-29 10:30:03 query A cdn.cloudflare.net from 192.168.1.55
